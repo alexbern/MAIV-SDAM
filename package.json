@@ -5,7 +5,8 @@
   "author": "Alex Bernard",
   "scripts": {
     "development": "webpack --watch",
-    "production": "webpack -d -p"
+    "production": "webpack -d -p",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "devDependencies": {
     "array.from": "^0.2.0",
@@ -32,9 +33,10 @@
     "postcss-cssnext": "^2.1.0",
     "postcss-loader": "^0.6.0",
     "postcss-will-change": "^1.0.0",
-    "react": "^15.0.0",
+    "react": "^15.0.2",
     "react-dom": "^15.0.0",
     "react-router": "^2.0.0",
+    "react-native": "^0.26.2",
     "sass-loader": "^2.0.1",
     "style-loader": "^0.12.3",
     "webpack": "^1.11.0"

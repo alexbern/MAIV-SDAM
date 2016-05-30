@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="<?php echo $basepath;?>/css/style.css" media="screen" charset="utf-8">
   </head>
   <body>
+    <div class="react-app">
+    </div>
     <script>
       window.app = window.app || {};
       window.app.basename = '<?php echo $basepath;?>';
