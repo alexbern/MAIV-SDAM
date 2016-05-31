@@ -14,6 +14,15 @@ export default class Home extends React.Component {
     return (
       <div>
         <nav className='navigation'>
+          <ul className='navigation-wrapper-list'>
+            <li className='hoogtel'>hoogtel</li>
+            <div className='navigation-options'>
+              <li>Plan je bezoek</li>
+              <li>Word ambassadeur</li>
+              <li>Onze kamers</li>
+            </div>
+            <li className='login'>Aanmelden</li>
+          </ul>
         </nav>
         <header className='search-header'>
           <div className='search-title-group'>

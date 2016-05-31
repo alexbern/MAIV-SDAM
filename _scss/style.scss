@@ -10,11 +10,30 @@ body{
 }
 
 .navigation{
-  background-color: black;
   position: fixed;
-  opacity: 0.5;
   width: 100%;
-  height: 60px;
+  height: 80px;
+  color: white;
+  font-family: $text;
+  font-size: 1.2rem;
+  .navigation-wrapper-list{
+    width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navigation-options{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .hoogtel{
+    color: #FEEA3E;
+  }
 }
 
 .search-header{
@@ -64,6 +83,7 @@ body{
     @include title-font();
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    font-size: 3.4rem;
   }
   ul{
     display: flex;
