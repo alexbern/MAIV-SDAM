@@ -7,6 +7,23 @@
     <meta name="description" content="Schiedam web app">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript,React">
     <meta name="author" content="Alex Bernard">
+
+    <script type="text/javascript">
+      WebFontConfig = {
+        custom: { families: ['San Fransisco'],
+                  urls: ['<?php echo $basepath;?>/assets/fonts/sf.css'] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+
     <link rel="stylesheet" href="<?php echo $basepath;?>/css/style.css" media="screen" charset="utf-8">
   </head>
   <body>

@@ -1,0 +1,13 @@
+@font-face{
+  font-family: 'SanFransisco';
+  src: url('sfreg.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: 'SanFransiscoMed';
+  src: url('sfmed.ttf');
+  font-weight: medium;
+  font-style: normal;
+}

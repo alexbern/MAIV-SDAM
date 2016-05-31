@@ -12,7 +12,73 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div>This is home</div>
+      <div>
+        <nav className='navigation'>
+        </nav>
+        <header className='search-header'>
+          <div className='search-title-group'>
+            <h1>Bewoon Schiedam</h1>
+            <h3>Reserveer een huis in Hotel Hoogstraat, en ervaar Schiedam alsof je er zelf leeft</h3>
+            <button>hoe werkt het?</button>
+          </div>
+        </header>
+        <section className='home-content'>
+          <section className='home-mostviewed'>
+            <h2>Meest Bekeken</h2>
+            <ul>
+              <li className='listItem'>
+                <img src='/assets/img/temp.png' className='listItemImage'/>
+                <article className='listItemInfo'>
+                  <h3>Lorem ipsum</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </article>
+              </li>
+
+              <li className='listItem'>
+                <img src='/assets/img/temp.png' className='listItemImage'/>
+                <article className='listItemInfo'>
+                  <h3>Lorem ipsum</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </article>
+              </li>
+
+              <li className='listItem'>
+                <img src='/assets/img/temp.png' className='listItemImage'/>
+                <article className='listItemInfo'>
+                  <h3>Lorem ipsum</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </article>
+              </li>
+
+              <li className='listItem'>
+                <img src='/assets/img/temp.png' className='listItemImage'/>
+                <article className='listItemInfo'>
+                  <h3>Lorem ipsum</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </article>
+              </li>
+
+              <li className='listItem'>
+                <img src='/assets/img/temp.png' className='listItemImage'/>
+                <article className='listItemInfo'>
+                  <h3>Lorem ipsum</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </article>
+              </li>
+
+              <li className='listItem'>
+                <img src='/assets/img/temp.png' className='listItemImage'/>
+                <article className='listItemInfo'>
+                  <h3>Lorem ipsum</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </article>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <footer className='home-footer'>
+        </footer>
+      </div>
     );
   }
 }
