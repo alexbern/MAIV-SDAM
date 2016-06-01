@@ -27,6 +27,10 @@ export default class Home extends React.Component {
             <button>hoe werkt het?</button>
           </div>
         </header>
+
+        <form className='search-form' action='#'>
+          <input type='text' className='search-input' placeholder='Naar wat voor woning ben je op zoek?'/><button className='search-submit'>zoeken</button>
+        </form>
         <section className='home-content'>
           <section className='home-mostviewed'>
             <h2>Meest Bekeken</h2>

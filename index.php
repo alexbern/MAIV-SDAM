@@ -7,15 +7,66 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 require WWW_ROOT . 'vendor'. DS . 'autoload.php';
+require WWW_ROOT . 'dao'. DS . 'RoomDAO.php';
+
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 use Slim\App;
+
+use PHPassLib\Hash\BCrypt;
+
+$secret = 'asFKslsqwpoqwf23';
 
 $app = new \Slim\App(['settings' => [
   'displayErrorDetails' => true
   ]
 ]);
 
-$secret = 'asFKslsqwpoqwf23';
+$app->post('/api/auth', function($request, $response, $args) use ($secret){
+
+  $body = $request->getParsedBody();
+
+  if (!empty($body)) {
+   if (!empty($body['email']) && !empty($body['password'])) {
+      $userDAO = new UserDAO();
+      $user = $userDAO->selectByEmail($body['email']);
+      if (!empty($user)) {
+        $verified = BCrypt::verify($body['password'], $user['password']);
+
+        if ($verified) {
+          $builder = new Builder();
+          $signer = new Sha256();
+
+          unset($user['password']);
+
+          $token = $builder
+                      ->setIssuedAt(time())
+                      ->setExpiration(time() + 3600)
+                      ->setAudience($body['clientId'])
+                      ->setSubject($user['id'])
+                      ->set('user', $user)
+                      ->sign($signer, $secret)
+                      ->getToken();
+
+                      $data = array('token' => (string) $token);
+
+
+          $response->getBody()->write(json_encode($data));
+          return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+        }
+      }
+   }
+
+  }
+
+  $data = array('error' => 'invalid email / password combination');
+  $response->getBody()->write(json_encode($data));
+  return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
+});
+
+require_once WWW_ROOT . 'routes' . DS . 'rooms.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');
