@@ -21,9 +21,18 @@ $app->get($base, function($request, $response, $args){
   //   return $response;
   // }
 
-  $roomDAO = new RoomDAO();
-  $data = array();
-  $data['rooms'] = $roomDAO -> selectAll();
+  $query = $request->getQueryParams();
+
+  if (!empty($query) && !empty($query['q'])) {
+    $roomDAO = new RoomDAO();
+    $data = array();
+    $data['rooms'] = $roomDAO -> selectByTag($query['q']);
+  }else{
+    $roomDAO = new RoomDAO();
+    $data = array();
+    $data['rooms'] = $roomDAO -> selectAll();
+  }
+
 
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');

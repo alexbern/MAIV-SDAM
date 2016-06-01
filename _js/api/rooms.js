@@ -10,6 +10,12 @@ export const getRooms = () => {
     .then(checkStatus);
 };
 
+export const searchRooms = (search) => {
+  return fetch(`${base}?q=${search}`)
+    .then(checkStatus);
+};
+
 export default {
-  getRooms
+  getRooms,
+  searchRooms
 };

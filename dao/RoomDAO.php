@@ -21,4 +21,12 @@ class RoomDAO extends DAO {
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function selectByTag($q) {
+    $sql = "SELECT *
+            FROM `rooms` where `tags` LIKE '%$q%' ";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
 }
