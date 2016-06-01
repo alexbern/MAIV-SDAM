@@ -6,7 +6,7 @@ class RoomDAO extends DAO {
 
   public function selectAll() {
     $sql = "SELECT *
-            FROM `rooms`";
+            FROM `sdam_rooms`";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -14,7 +14,7 @@ class RoomDAO extends DAO {
 
   public function selectById($id) {
     $sql = "SELECT *
-            FROM `rooms` where `id` = :id";
+            FROM `sdam_rooms` where `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     $stmt->execute();
@@ -23,7 +23,7 @@ class RoomDAO extends DAO {
 
   public function selectByTag($q) {
     $sql = "SELECT *
-            FROM `rooms` where `tags` LIKE '%$q%' ";
+            FROM `sdam_rooms` where `tags` LIKE '%$q%' ";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
