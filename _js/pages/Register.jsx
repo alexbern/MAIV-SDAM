@@ -11,8 +11,7 @@ export default class Register extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
-
-
+  
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -38,10 +37,14 @@ export default class Register extends React.Component {
     let errors = this.validate();
     if (isEmpty(errors)) {
       // //fetch
-      insert(this.state);
-        // .then(()=>login(this.state));
-        // .then(t=>token.set(t));
-        // .then(()=> { this.context.router.push('/home');
+      insert(this.state)
+        .then(()=>login(this.state))
+        .then(t=>token.set(t))
+        .then(()=> {
+          this.context.router.push('/home');
+        });
+    }else{
+      this.setState({errors, password: ''});
     }
   }
 
@@ -69,7 +72,6 @@ export default class Register extends React.Component {
 
   render() {
     let {name, password, email, phone} = this.state;
-    console.log(this.state);
     return (
       <form action="" method="post" onSubmit={(e)=>this.submitHandler(e)} acceptCharset="utf-8">
         <fieldset className="register-fieldset">

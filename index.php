@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 require WWW_ROOT . 'vendor'. DS . 'autoload.php';
 require WWW_ROOT . 'dao'. DS . 'RoomDAO.php';
 require WWW_ROOT . 'dao'. DS . 'UserDAO.php';
+require WWW_ROOT . 'dao'. DS . 'NewsletterDAO.php';
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
@@ -69,6 +70,7 @@ $app->post('/api/auth', function($request, $response, $args) use ($secret){
 
 require_once WWW_ROOT . 'routes' . DS . 'users.php';
 require_once WWW_ROOT . 'routes' . DS . 'rooms.php';
+require_once WWW_ROOT . 'routes' . DS . 'newsletters.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');

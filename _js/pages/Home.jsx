@@ -1,18 +1,32 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {Navigation, Listitem} from '../components';
 import {searchRooms} from '../api/rooms';
+import {insert} from '../api/newsletters';
+import {isEmpty} from 'lodash';
+import token from '../auth/token';
 
 export default class Home extends React.Component {
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
       search: '',
-      rooms: ''
+      rooms: '',
+      email: ''
     };
+  }
+
+  componentDidMount(){
+    if (token.content() && token.content().user.email) {
+      this.setState({email: token.content().user.email});
+    }
   }
 
   submitHandler(e){
@@ -26,12 +40,29 @@ export default class Home extends React.Component {
     }
   }
 
+  letterSubmitHandler(e){
+    e.preventDefault();
+    let {email} = this.state;
+    if (isEmpty(email)) {
+      return;
+    }else{
+      insert(this.state);
+    }
+  }
+
+  letterChangeHandler(){
+    let {letter} = this.refs;
+    this.setState({email: letter.value});
+    console.log('derp');
+  }
+
   changeHandler(){
     let {search} = this.refs;
     this.setState({search: search.value});
   }
 
   render() {
+    let {email} = this.state;
     console.log(this.state);
     return (
       <div>
@@ -62,6 +93,9 @@ export default class Home extends React.Component {
           </section>
         </section>
         <footer className='home-footer'>
+          <form action='#' onSubmit={(e)=>this.letterSubmitHandler(e)}>
+            <input type='email' ref='letter' placeholder='Nieuwsbrief' value={email} onChange={()=>this.letterChangeHandler()} /><button>Subscribe</button>
+          </form>
         </footer>
       </div>
     );
