@@ -3,7 +3,7 @@
 import React from 'react';
 import {Router, Route, IndexRedirect, useRouterHistory} from 'react-router';
 
-import {App, Home, Register, Login} from '../pages/';
+import {App, Home, Register, Login, Overview} from '../pages/';
 import {createHistory} from 'history';
 import {basename} from '../globals/';
 import token from '../auth/token';
@@ -28,6 +28,7 @@ export default () => {
         <Route path="home" component={Home}/>
         <Route path="register" component={Register}/>
         <Route path="login" component={Login}/>
+        <Route path="overview" component={Overview}/>
         <Route path="logout" onEnter={logout}/>
       </Route>
     </Router>
