@@ -19,12 +19,14 @@ export default class Overview extends React.Component {
   componentWillMount(){
     getProjects()
       .then(projects => this.setState({projects: projects}));
+    // getProjectsById(2)
+    //   .then(projects => this.setState({projects: projects}));
   }
 
   render() {
     console.log(this.state);
     return (
-      <div>Dit is detail</div>
+      <div>Dit is de overview</div>
     );
   }
 }

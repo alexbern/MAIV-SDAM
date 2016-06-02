@@ -2,16 +2,9 @@
 
 import React from 'react';
 
-export default class Navigation extends React.Component {
+export default () => {
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
+  return (
       <nav className='navigation'>
         <ul className='navigation-wrapper-list'>
           <li className='hoogtel'>hoogtel</li>
@@ -24,5 +17,4 @@ export default class Navigation extends React.Component {
         </ul>
       </nav>
     );
-  }
-}
+};

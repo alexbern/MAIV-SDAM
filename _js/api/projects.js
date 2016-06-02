@@ -10,6 +10,12 @@ export const getProjects = () => {
     .then(checkStatus);
 };
 
+export const getProjectsById = (id) => {
+  return fetch(`${base}/${id}`)
+    .then(checkStatus);
+};
+
 export default {
-  getProjects
+  getProjects,
+  getProjectsById
 };
