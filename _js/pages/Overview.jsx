@@ -2,6 +2,7 @@
 
 import React, {PropTypes} from 'react';
 import {getProjects} from '../api/projects';
+import {getRooms} from '../api/rooms';
 
 export default class Overview extends React.Component {
 
@@ -17,10 +18,26 @@ export default class Overview extends React.Component {
   }
 
   componentWillMount(){
-    getProjects()
-      .then(projects => this.setState({projects: projects}));
-    // getProjectsById(2)
-    //   .then(projects => this.setState({projects: projects}));
+    if (window.location.search === '') {
+      this.context.router.push('/home');
+    }
+
+    if(window.location.search === '?type=rooms' || window.location.search === '?type=projects'){
+      if (window.location.search === '?type=rooms') {
+        getRooms()
+          .then(rooms => this.setState({projects: rooms}));
+      }
+      if (window.location.search === '?type=projects') {
+        getProjects()
+          .then(projects => this.setState({projects: projects}));
+      }
+    }else{
+      this.context.router.push('/home');
+    }
+  }
+
+  componentDidMount(){
+
   }
 
   render() {

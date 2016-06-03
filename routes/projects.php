@@ -24,7 +24,6 @@ $app->get($base, function($request, $response, $args){
   $projectDAO = new ProjectDAO();
   $data = array();
   $data['projects'] = $projectDAO -> selectAll();
-
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');
 
