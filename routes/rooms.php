@@ -60,7 +60,7 @@ $app->get($base . '/{id}', function($request, $response, $args){
 
   $roomDAO = new RoomDAO();
   $data = array();
-  $data['rooms'] = $roomDAO -> selectById($args['id']);
+  $data['room'] = $roomDAO -> selectById($args['id']);
 
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');

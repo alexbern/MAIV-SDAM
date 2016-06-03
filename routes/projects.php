@@ -50,7 +50,7 @@ $app->get($base . '/{id}', function($request, $response, $args){
 
   $projectDAO = new ProjectDAO();
   $data = array();
-  $data['rooms'] = $projectDAO -> selectById($args['id']);
+  $data['project'] = $projectDAO -> selectById($args['id']);
 
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');

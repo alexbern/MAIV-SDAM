@@ -15,7 +15,13 @@ export const searchRooms = (search) => {
     .then(checkStatus);
 };
 
+export const getRoomById = (id) => {
+  return fetch(`${base}/${id}`)
+    .then(checkStatus);
+};
+
 export default {
   getRooms,
-  searchRooms
+  searchRooms,
+  getRoomById
 };
