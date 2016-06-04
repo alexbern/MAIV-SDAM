@@ -26,7 +26,7 @@ $app->get($base, function($request, $response, $args){
   if (!empty($query) && !empty($query['q'])) {
     $roomDAO = new RoomDAO();
     $data = array();
-    $data['rooms'] = $roomDAO -> selectByTag($query['q']);
+    $data['rooms'] = $roomDAO -> searchRooms($query['q']);
   }else{
     $roomDAO = new RoomDAO();
     $data = array();

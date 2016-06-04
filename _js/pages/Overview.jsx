@@ -2,7 +2,12 @@
 
 import React, {PropTypes} from 'react';
 import {getProjects} from '../api/projects';
-import {getRooms} from '../api/rooms';
+import {getRooms, searchRooms} from '../api/rooms';
+import {addVote} from '../api/votes';
+import {searchProjects} from '../api/projects';
+import {Project} from '../components';
+import Emitter from '../events/';
+import token from '../auth/token';
 
 export default class Overview extends React.Component {
 
@@ -13,15 +18,52 @@ export default class Overview extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      projects: ''
+      projects: '',
+      search: ''
     };
+
+    Emitter.on('vote', content=> this.voteHandler(content));
+  }
+
+  voteHandler(id){
+    if (!token.content()) {
+      return false;
+    }else{
+      let userid = token.content().user.id;
+      console.log(userid, id);
+      let data = [userid, id];
+
+    }
+  }
+
+  changeHandler(){
+    let {search} = this.refs;
+    this.setState({search: search.value});
+  }
+
+  submitHandler(e){
+    e.preventDefault();
+    let {search} = this.state;
+    if (search === '') {
+      return;
+    }else{
+      if (window.location.search === '?type=rooms') {
+        //zoek kamers
+        searchRooms(this.state.search)
+          .then(projects => this.setState({projects: projects}));
+      }
+      if (window.location.search === '?type=projects') {
+        //zoekprojecten
+        searchProjects(this.state.search)
+          .then(projects => this.setState({projects: projects}));
+      }
+    }
   }
 
   componentWillMount(){
     if (window.location.search === '') {
       this.context.router.push('/home');
     }
-
     if(window.location.search === '?type=rooms' || window.location.search === '?type=projects'){
       if (window.location.search === '?type=rooms') {
         getRooms()
@@ -33,17 +75,34 @@ export default class Overview extends React.Component {
       }
     }else{
       this.context.router.push('/home');
+      return;
     }
   }
 
-  componentDidMount(){
+  renderItems(){
+    if (window.location.search === '?type=rooms') {
+      console.log('render rooms');
+    }
 
+    if (window.location.search === '?type=projects') {
+      let {projects} = this.state;
+      if (projects) {
+        return projects.projects.map((project, i)=>{
+          return <Project {...project} key={i}/>;
+        });
+      }
+    }
   }
 
   render() {
-    console.log(this.state);
     return (
-      <div>Dit is de overview</div>
+      <div>
+        <div>Dit is de overview</div>
+        {this.renderItems()}
+        <form className='search-form' action='#' onSubmit={(e)=>this.submitHandler(e)}>
+          <input type='text' className='search-input' onChange={()=>this.changeHandler()} ref="search" name='search' placeholder='Naar wat voor woning ben je op zoek?'/><button className='search-submit'>zoeken</button>
+        </form>
+      </div>
     );
   }
 }

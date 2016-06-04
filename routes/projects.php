@@ -21,9 +21,18 @@ $app->get($base, function($request, $response, $args){
   //   return $response;
   // }
 
-  $projectDAO = new ProjectDAO();
-  $data = array();
-  $data['projects'] = $projectDAO -> selectAll();
+  $query = $request->getQueryParams();
+
+  if (!empty($query) && !empty($query['q'])) {
+    $projectDAO = new ProjectDAO();
+    $data = array();
+    $data['projects'] = $projectDAO -> searchProjects($query['q']);
+  }else{
+    $projectDAO = new ProjectDAO();
+    $data = array();
+    $data['projects'] = $projectDAO -> selectAll();
+  }
+
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');
 

@@ -7,7 +7,7 @@ let base = `${basename}/api/newsletters`;
 
 export const insert = (data) => {
   let method = 'POST';
-  let body = buildBody(data, ['email']);
+  let body = buildBody(data, ['email', 'name']);
   let headers = new Headers({'Content-Type': 'application/json'});
 
   return fetch(base, {method, body, headers})
