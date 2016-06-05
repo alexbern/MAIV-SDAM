@@ -26,9 +26,7 @@ export const checkVote = (userid, projectid) =>{
 
 export const deleteVote = (userid, id) => {
   let method = 'DELETE';
-  let headers = new Headers({'Content-Type': 'application/json'});
-
-  return fetch(`${base}?user=${userid}&project=${id}`, {method, headers})
+  return fetch(`${base}?user=${userid}&project=${id}`, {method})
     .then(checkStatus);
 };
 

@@ -61,7 +61,7 @@ class VoteDAO extends DAO {
     $stmt->bindValue(':user_id', $userid);
     $stmt->bindValue(':project_id', $projectid);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return false;
   }
 
   public function getValidationErrors($data) {

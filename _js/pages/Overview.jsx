@@ -33,7 +33,7 @@ export default class Overview extends React.Component {
       let userid = token.content().user.id;
       checkVote(userid, id)
         .then( votes => {
-          if (isEmpty(votes.votes) === false) {
+          if(isEmpty(votes.votes) === false) {
             //verwijderen
             deleteVote(userid, id)
               .then(Emitter.emit('reload'));
@@ -44,7 +44,6 @@ export default class Overview extends React.Component {
               .then(Emitter.emit('reload'));
           }
         });
-
     }
   }
 

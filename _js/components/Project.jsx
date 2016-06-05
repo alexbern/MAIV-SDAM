@@ -34,7 +34,6 @@ export default class Project extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     let {name} = this.props;
     let {votes} = this.state;
     return (

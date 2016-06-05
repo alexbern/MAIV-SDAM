@@ -58,10 +58,9 @@ $app->get($base . '/{id}', function($request, $response, $args){
   // }
 
   $projectDAO = new ProjectDAO();
-  $data = array();
-  $data['project'] = $projectDAO -> selectById($args['id']);
+  $project = $projectDAO -> selectById($args['id']);
 
-  $response->getBody()->write(json_encode($data));
+  $response->getBody()->write(json_encode($project));
   return $response->withHeader('Content-Type','application/json');
 
 });
