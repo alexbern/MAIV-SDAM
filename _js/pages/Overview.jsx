@@ -32,17 +32,15 @@ export default class Overview extends React.Component {
     }else{
       let userid = token.content().user.id;
       checkVote(userid, id)
-        .then(vote => this.setState({votes: vote}))
-        .then( () => {
-          let {votes} = this.state;
+        .then( votes => {
           if (isEmpty(votes.votes) === false) {
-            //verwijderen
-            console.log('deleting vote');
-            deleteVote(userid, id);
+            deleteVote(userid, id)
+              .then(Emitter.emit('reload'));
           }
           if (isEmpty(votes.votes) === true) {
             let data = {userid: userid, id: id};
-            addVote(data);
+            addVote(data)
+              .then(Emitter.emit('reload'));
           }
         });
 

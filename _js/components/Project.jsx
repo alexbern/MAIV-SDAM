@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {countVotes} from '../api/votes';
-import Emiter from '../events/';
+import Emitter from '../events/';
 import {size} from 'lodash';
 
 export default class Project extends React.Component {
@@ -12,9 +12,15 @@ export default class Project extends React.Component {
     this.state = {
       votes: ''
     };
+
+    Emitter.on('reload', ()=> this.countVotes());
   }
 
   componentWillMount(){
+    this.countVotes();
+  }
+
+  countVotes(){
     countVotes(this.props.id)
       .then(votes => {
         let voteCount = size(votes.votes).toString();
@@ -24,12 +30,10 @@ export default class Project extends React.Component {
 
   vote(){
     let {id} = this.props;
-    Emiter.emit('vote', id);
-    this.componentWillMount();
+    Emitter.emit('vote', id);
   }
 
   render() {
-    console.log(this.state);
     let {name} = this.props;
     let {votes} = this.state;
     return (
