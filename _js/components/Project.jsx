@@ -16,10 +16,6 @@ export default class Project extends React.Component {
     Emitter.on('reload', ()=> this.countVotes());
   }
 
-  componentWillMount(){
-    this.countVotes();
-  }
-
   countVotes(){
     countVotes(this.props.id)
       .then(votes => {
@@ -28,12 +24,17 @@ export default class Project extends React.Component {
       });
   }
 
+  componentWillMount(){
+    this.countVotes();
+  }
+
   vote(){
     let {id} = this.props;
     Emitter.emit('vote', id);
   }
 
   render() {
+    console.log(this.state);
     let {name} = this.props;
     let {votes} = this.state;
     return (
