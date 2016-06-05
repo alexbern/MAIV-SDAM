@@ -1,19 +1,42 @@
 'use strict';
 
 import React from 'react';
+import {countVotes} from '../api/votes';
 import Emiter from '../events/';
+import {size} from 'lodash';
 
-export default (props) => {
+export default class Project extends React.Component {
 
-  let {name, id} = props;
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      votes: ''
+    };
+  }
 
-  const vote = () =>{
+  componentWillMount(){
+    countVotes(this.props.id)
+      .then(votes => {
+        let voteCount = size(votes.votes).toString();
+        this.setState({votes: voteCount});
+      });
+  }
+
+  vote(){
+    let {id} = this.props;
     Emiter.emit('vote', id);
-  };
+    this.componentWillMount();
+  }
 
-  return (
+  render() {
+    console.log(this.state);
+    let {name} = this.props;
+    let {votes} = this.state;
+    return (
       <div>{name}
-        <input type='submit' onClick={() => vote()} value='vote'/>
+        <input type='submit' onClick={() => this.vote()} value='vote'/>
+        votes: {votes}
       </div>
     );
-};
+  }
+}

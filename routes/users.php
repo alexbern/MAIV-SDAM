@@ -22,20 +22,27 @@ $app->post($base, function($request, $response, $args){
 
   $user = $request->getParsedBody();
 
-  if($user['password']){
-    $user['password'] = BCrypt::hash($user['password']);
-  }
+  $existing = $userDAO->selectByEmail($user['email']);
+  if (!empty($existing)) {
+    return false;
+    exit();
+    die();
+  }else{
+    if($user['password']){
+      $user['password'] = BCrypt::hash($user['password']);
+    }
 
-  $insertedUser = $userDAO->insert($user);
+    $insertedUser = $userDAO->insert($user);
 
-  if(empty($insertedUser)) {
-    $errors = array();
-    $errors['errors'] = $userDAO->getValidationErrors($user);
-    $response->getBody()->write(json_encode($errors));
-    $response = $response->withStatus(400);
-  } else {
-    $response->getBody()->write(json_encode($insertedUser));
-    $response = $response->withStatus(201);
+    if(empty($insertedUser)) {
+      $errors = array();
+      $errors['errors'] = $userDAO->getValidationErrors($user);
+      $response->getBody()->write(json_encode($errors));
+      $response = $response->withStatus(400);
+    } else {
+      $response->getBody()->write(json_encode($insertedUser));
+      $response = $response->withStatus(201);
+    }
   }
 
   return $response->withHeader('Content-Type','application/json');

@@ -3,9 +3,10 @@
 import React, {PropTypes} from 'react';
 import {getProjects} from '../api/projects';
 import {getRooms, searchRooms} from '../api/rooms';
-import {addVote} from '../api/votes';
+import {addVote, checkVote, deleteVote} from '../api/votes';
 import {searchProjects} from '../api/projects';
 import {Project} from '../components';
+import {isEmpty} from 'lodash';
 import Emitter from '../events/';
 import token from '../auth/token';
 
@@ -30,8 +31,20 @@ export default class Overview extends React.Component {
       return false;
     }else{
       let userid = token.content().user.id;
-      console.log(userid, id);
-      let data = [userid, id];
+      checkVote(userid, id)
+        .then(vote => this.setState({votes: vote}))
+        .then( () => {
+          let {votes} = this.state;
+          if (isEmpty(votes.votes) === false) {
+            //verwijderen
+            console.log('deleting vote');
+            deleteVote(userid, id);
+          }
+          if (isEmpty(votes.votes) === true) {
+            let data = {userid: userid, id: id};
+            addVote(data);
+          }
+        });
 
     }
   }
