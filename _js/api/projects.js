@@ -15,7 +15,13 @@ export const getProjectById = (id) => {
     .then(checkStatus);
 };
 
+export const searchProjects = (search) => {
+  return fetch(`${base}?q=${search}`)
+    .then(checkStatus);
+};
+
 export default {
   getProjects,
-  getProjectById
+  getProjectById,
+  searchProjects
 };

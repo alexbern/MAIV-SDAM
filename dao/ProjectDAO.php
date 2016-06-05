@@ -19,4 +19,12 @@ class ProjectDAO extends DAO {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function searchProjects($q){
+    $sql = "SELECT *
+            FROM `sdam_projects` where `name` LIKE '%$q%'";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

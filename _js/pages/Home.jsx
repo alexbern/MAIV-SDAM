@@ -19,13 +19,17 @@ export default class Home extends React.Component {
     this.state = {
       search: '',
       rooms: '',
-      email: ''
+      email: '',
+      name: ''
     };
   }
 
   componentDidMount(){
     if (token.content() && token.content().user.email) {
       this.setState({email: token.content().user.email});
+    }
+    if (token.content() && token.content().user.name) {
+      this.setState({name: token.content().user.name});
     }
   }
 
@@ -42,8 +46,8 @@ export default class Home extends React.Component {
 
   letterSubmitHandler(e){
     e.preventDefault();
-    let {email} = this.state;
-    if (isEmpty(email)) {
+    let {email, name} = this.state;
+    if (isEmpty(email) || isEmpty(name)) {
       return;
     }else{
       insert(this.state);
@@ -51,8 +55,11 @@ export default class Home extends React.Component {
   }
 
   letterChangeHandler(){
-    let {letter} = this.refs;
-    this.setState({email: letter.value});
+    let {letter, name} = this.refs;
+    this.setState({
+      email: letter.value,
+      name: name.value
+    });
     console.log('derp');
   }
 
@@ -62,7 +69,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    let {email} = this.state;
+    let {email, name} = this.state;
     console.log(this.state);
     return (
       <div>
@@ -94,6 +101,7 @@ export default class Home extends React.Component {
         </section>
         <footer className='home-footer'>
           <form action='#' onSubmit={(e)=>this.letterSubmitHandler(e)}>
+            <input type='text' ref='name' placeholder='Naam' value={name} onChange={()=>this.letterChangeHandler()} />
             <input type='email' ref='letter' placeholder='Nieuwsbrief' value={email} onChange={()=>this.letterChangeHandler()} /><button>Subscribe</button>
           </form>
         </footer>

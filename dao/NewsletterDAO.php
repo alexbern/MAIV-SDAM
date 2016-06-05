@@ -34,10 +34,11 @@ class NewsletterDAO extends DAO {
   public function insert($data) {
     $errors = $this->getValidationErrors($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `sdam_newsletters` (`email`)
-              VALUES (:email)";
+      $sql = "INSERT INTO `sdam_newsletters` (`email`, `name`)
+              VALUES (:email, :name)";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $data['email']);
+      $stmt->bindValue(':name', $data['name']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectById($insertedId);
@@ -50,6 +51,9 @@ class NewsletterDAO extends DAO {
     $errors = array();
     if(empty($data['email'])) {
       $errors['email'] = 'please enter the email';
+    }
+    if(empty($data['name'])) {
+      $errors['name'] = 'no name was given';
     }
     return $errors;
   }

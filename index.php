@@ -11,6 +11,7 @@ require WWW_ROOT . 'dao'. DS . 'RoomDAO.php';
 require WWW_ROOT . 'dao'. DS . 'UserDAO.php';
 require WWW_ROOT . 'dao'. DS . 'NewsletterDAO.php';
 require WWW_ROOT . 'dao'. DS . 'ProjectDAO.php';
+require WWW_ROOT . 'dao'. DS . 'VoteDAO.php';
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
@@ -55,7 +56,6 @@ $app->post('/api/auth', function($request, $response, $args) use ($secret){
 
                       $data = array('token' => (string) $token);
 
-
           $response->getBody()->write(json_encode($data));
           return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
         }
@@ -73,6 +73,7 @@ require_once WWW_ROOT . 'routes' . DS . 'users.php';
 require_once WWW_ROOT . 'routes' . DS . 'rooms.php';
 require_once WWW_ROOT . 'routes' . DS . 'newsletters.php';
 require_once WWW_ROOT . 'routes' . DS . 'projects.php';
+require_once WWW_ROOT . 'routes' . DS . 'votes.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');
