@@ -25,6 +25,7 @@
     </script>
 
     <link rel="stylesheet" href="<?php echo $basepath;?>/css/style.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="<?php echo $basepath;?>/css/rating.min.css" media="screen" charset="utf-8">
   </head>
   <body>
     <div class="react-app">
@@ -33,6 +34,7 @@
       window.app = window.app || {};
       window.app.basename = '<?php echo $basepath;?>';
     </script>
+    
     <script src="<?php echo $basepath; ?>/js/script.js"></script>
   </body>
 </html>

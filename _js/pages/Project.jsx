@@ -73,7 +73,7 @@ export default class Project extends React.Component {
   }
 
   render() {
-    let {project, votes} = this.state;
+    let {votes} = this.state;
     return (
       <div>
         Likes: {votes}

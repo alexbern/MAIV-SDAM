@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 01, 2016 at 11:16 PM
+-- Generation Time: Jun 06, 2016 at 12:13 AM
 -- Server version: 5.5.42
 -- PHP Version: 7.0.0
 
@@ -28,8 +28,29 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `sdam_newsletters` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sdam_projects`
+--
+
+CREATE TABLE `sdam_projects` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `owner_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sdam_projects`
+--
+
+INSERT INTO `sdam_projects` (`id`, `name`, `owner_id`) VALUES
+(1, 'Project 1', 1),
+(2, 'Project 2', 1);
 
 -- --------------------------------------------------------
 
@@ -65,6 +86,18 @@ CREATE TABLE `sdam_users` (
   `phone` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sdam_votes`
+--
+
+CREATE TABLE `sdam_votes` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -73,6 +106,12 @@ CREATE TABLE `sdam_users` (
 -- Indexes for table `sdam_newsletters`
 --
 ALTER TABLE `sdam_newsletters`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sdam_projects`
+--
+ALTER TABLE `sdam_projects`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -88,6 +127,12 @@ ALTER TABLE `sdam_users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sdam_votes`
+--
+ALTER TABLE `sdam_votes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -97,6 +142,11 @@ ALTER TABLE `sdam_users`
 ALTER TABLE `sdam_newsletters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `sdam_projects`
+--
+ALTER TABLE `sdam_projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `sdam_rooms`
 --
 ALTER TABLE `sdam_rooms`
@@ -105,6 +155,11 @@ ALTER TABLE `sdam_rooms`
 -- AUTO_INCREMENT for table `sdam_users`
 --
 ALTER TABLE `sdam_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `sdam_votes`
+--
+ALTER TABLE `sdam_votes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
