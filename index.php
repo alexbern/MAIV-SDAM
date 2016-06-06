@@ -12,6 +12,7 @@ require WWW_ROOT . 'dao'. DS . 'UserDAO.php';
 require WWW_ROOT . 'dao'. DS . 'NewsletterDAO.php';
 require WWW_ROOT . 'dao'. DS . 'ProjectDAO.php';
 require WWW_ROOT . 'dao'. DS . 'VoteDAO.php';
+require WWW_ROOT . 'dao'. DS . 'ReviewDAO.php';
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
@@ -74,6 +75,7 @@ require_once WWW_ROOT . 'routes' . DS . 'rooms.php';
 require_once WWW_ROOT . 'routes' . DS . 'newsletters.php';
 require_once WWW_ROOT . 'routes' . DS . 'projects.php';
 require_once WWW_ROOT . 'routes' . DS . 'votes.php';
+require_once WWW_ROOT . 'routes' . DS . 'reviews.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');
