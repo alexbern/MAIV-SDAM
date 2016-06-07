@@ -10,9 +10,9 @@ $app->get($base, function($request, $response, $args){
     $roomDAO = new RoomDAO();
     $data = array();
     $data['rooms'] = $roomDAO -> searchRooms($query['q']);
-    if (sizeof($data['rooms']) < 4) {
+    if (sizeof($data['rooms']) < 3) {
       $currentArrayLength = sizeOf($data['rooms']);
-      $otherSearches = $roomDAO->getExtraSearches(4-$currentArrayLength);
+      $otherSearches = $roomDAO->getExtraSearches(3-$currentArrayLength);
       $selectedSearches = array_merge($data['rooms'], $otherSearches);
       $data['rooms'] = $selectedSearches;
     }

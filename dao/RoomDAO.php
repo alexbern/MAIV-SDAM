@@ -31,7 +31,7 @@ class RoomDAO extends DAO {
 
   public function searchRooms($q) {
     $sql = "SELECT *
-            FROM `sdam_rooms` where `tags` LIKE '%$q%' OR `name` LIKE '%$q%' LIMIT 4";
+            FROM `sdam_rooms` where `tags` LIKE '%$q%' OR `name` LIKE '%$q%' LIMIT 3";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
