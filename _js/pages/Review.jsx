@@ -26,8 +26,6 @@ export default class Review extends React.Component {
       accomo: '',
       value: '',
     };
-    let een = document.querySelector('#one');
-    console.log(een);
   }
 
   componentWillMount(){
@@ -41,7 +39,13 @@ export default class Review extends React.Component {
         //OPHALEN
         getRoomById(id)
           .then(room => this.setState({room: room}))
-          .then(this.setState({userId: token.content().user.id, roomId: parseInt(id)}));
+          .then(this.setState({userId: token.content().user.id, roomId: parseInt(id)}))
+          .then(()=>{
+            let {room} = this.state;
+            if (room.room === false) {
+              this.context.router.push('/home');
+            }
+          })
       }
     }
   }

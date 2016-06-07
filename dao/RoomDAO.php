@@ -12,6 +12,14 @@ class RoomDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function getExtraSearches($limit) {
+    $sql = "SELECT * FROM `sdam_rooms` ORDER BY RAND() LIMIT :amount";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':amount', $limit);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function selectById($id) {
     $sql = "SELECT *
             FROM `sdam_rooms` where `id` = :id";
@@ -23,7 +31,7 @@ class RoomDAO extends DAO {
 
   public function searchRooms($q) {
     $sql = "SELECT *
-            FROM `sdam_rooms` where `tags` LIKE '%$q%' OR `name` LIKE '%$q%' ";
+            FROM `sdam_rooms` where `tags` LIKE '%$q%' OR `name` LIKE '%$q%' LIMIT 4";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
