@@ -34,7 +34,7 @@
       window.app = window.app || {};
       window.app.basename = '<?php echo $basepath;?>';
     </script>
-    
+
     <script src="<?php echo $basepath; ?>/js/script.js"></script>
   </body>
 </html>

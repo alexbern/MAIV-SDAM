@@ -6,12 +6,56 @@ $base = '/api/users';
 
 $app->get($base, function($request, $response, $args){
 
-  $userDAO = new UserDAO();
+  $token = new Token();
+  $token->setFromRequest($request);
 
-  $data = array();
-  $data['users'] = $userDAO->selectAll();;
+  //check if logged in
+  if(!$token->verify()) {
+    $response = $response->withStatus(401);
+    return $response;
+  }
+
+  if ($token->isAdmin() === 0) {
+    $response = $response->withStatus(401);
+    return $response;
+  }else{
+    $userDAO = new UserDAO();
+    $data = array();
+    $data['users'] = $userDAO->selectAll();
+  }
 
   $response->getBody()->write(json_encode($data));
+  return $response->withHeader('Content-Type','application/json');
+
+});
+
+$app->get($base . '/{id}', function($request, $response, $args){
+
+  $token = new Token();
+  $token->setFromRequest($request);
+
+  if ($args['id']) {
+
+  }else{
+    $response = $response->withStatus(404);
+    return $response;
+  }
+
+  //check if logged in
+  if(!$token->verify()) {
+    $response = $response->withStatus(401);
+    return $response;
+  }
+
+  if ($token->isAdmin() === 0) {
+    $response = $response->withStatus(401);
+    return $response;
+  }else{
+    $userDAO = new UserDAO();
+    $user = $userDAO->selectById($args['id']);
+  }
+
+  $response->getBody()->write(json_encode($user));
   return $response->withHeader('Content-Type','application/json');
 
 });
