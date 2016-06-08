@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'San_Francisco';
+    src: url('san_francisco/sanfrancisco.woff2') format('woff2'),
+         url('san_francisco/sanfrancisco.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'San_Francisco';
+    src: url('san_francisco/sanfrancisco-bold.woff2') format('woff2'),
+         url('san_francisco/sanfrancisco-bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}

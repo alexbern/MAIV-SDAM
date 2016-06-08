@@ -11,15 +11,21 @@ export default class Register extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
-  
+
   constructor(props, context) {
     super(props, context);
     this.state = {
       email: '',
       name: '',
       password: '',
-      phone: ''
+      phone: '',
+      image: ''
     };
+  }
+
+  onFileChangeHandler(e){
+    this.setState({image: e.currentTarget.files[0]});
+    console.log(e.currentTarget.files[0]);
   }
 
   changeHandler(){
@@ -34,23 +40,29 @@ export default class Register extends React.Component {
 
   submitHandler(e){
     e.preventDefault();
+    console.log(this.state);
     let errors = this.validate();
     if (isEmpty(errors)) {
-      // //fetch
       insert(this.state)
         .then(()=>login(this.state))
         .then(t=>token.set(t))
         .then(()=> {
           this.context.router.push('/home');
         });
+      console.log(this.state);
     }else{
       this.setState({errors, password: ''});
     }
   }
 
   validate(){
-    let {email, password, name, phone} = this.state;
+    let {email, password, name, phone, image} = this.state;
     let errors = {};
+
+    if(!image){
+      errors.image = 'Geen image meegegeven';
+    }
+
     if(!email){
       errors.email = 'Ongeldig email adress';
     }
@@ -73,16 +85,46 @@ export default class Register extends React.Component {
   render() {
     let {name, password, email, phone} = this.state;
     return (
-      <form action="" method="post" onSubmit={(e)=>this.submitHandler(e)} acceptCharset="utf-8">
-        <fieldset className="register-fieldset">
-          <h1>REGISTER</h1>
-          <label for="register-name">name:</label><input type="text" ref="name" onChange={()=>this.changeHandler()} id="register-name" name="register-name" value={name} />
-          <label for="register-email">email:</label><input type="email" ref="email" onChange={()=>this.changeHandler()} id="register-email" name="register-email" value={email} />
-          <label for="register-password">password:</label><input type="password" ref="password" onChange={()=>this.changeHandler()} id="register-password" name="register-password" value={password} />
-          <label for="register-phone">phone:</label><input type="text" ref="phone" onChange={()=>this.changeHandler()} id="register-phone" name="register-phone" value={phone} />
-        </fieldset>
-        <input type="submit" value="register" />
-      </form>
+        <main className='registreren'>
+          <div className="navigatie">
+            <div className="container">
+              <a href="index.html" className="logo">hoogtel</a>
+            </div>
+          </div>
+          <div className="formulier">
+            <h1 className="inner_page_title">Registreren</h1>
+            <form method="post" onSubmit={(e)=>this.submitHandler(e)} acceptCharset="utf-8" enctype="multipart/form-data">
+              <div className="form_item">
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                <label for="image" name="image" for="image">selecteer een afbeelding
+                <input type="file" id="image" accept="image/*" ref="file" onChange={(e)=>this.onFileChangeHandler(e)}/></label>
+              </div>
+              <div className="form_item">
+                <label for="naam">naam</label>
+                <input type="text" id="naam" placeholder="Wat is je naam?" ref="name" onChange={()=>this.changeHandler()} value={name} />
+              </div>
+              <div className="form_item">
+                <label for="telefoon">telefoon</label>
+                <input type="tel" id="telefoon" placeholder="+32 012 45 67 89" ref="phone" onChange={()=>this.changeHandler()} value={phone}/>
+              </div>
+              <div className="form_item">
+                <label for="email">email</label>
+                <input type="email" id="email" name='email' placeholder="Wat is je e-mail adres?" ref="email" onChange={()=>this.changeHandler()} value={email}/>
+              </div>
+              <div className="form_item">
+                <label for="password">wachtwoord</label>
+                <input type="password" id="password" placeholder="Wat is je wachtwoord?" ref="password" onChange={()=>this.changeHandler()} value={password}/>
+              </div>
+              <input type="submit" value="registreren" />
+            </form>
+          </div>
+          <div className="afbeelding">
+            <img className="lachende_man" src="assets/img/lachende_man.png" />
+          </div>
+          <div className="page_title">
+            <h1>Registreren</h1>
+          </div>
+        </main>
     );
   }
 }

@@ -16,7 +16,19 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
+  box-sizing: border-box;
   vertical-align: baseline;
+  appearance: none;
+  border: none;
+ }
+ *:focus{
+ 	outline:none;
+ }
+ ::-webkit-scrollbar {
+     display: none;
+ }
+ html{
+ 	font-size:62.5%;
  }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -25,6 +37,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
+  font-family: 'San_Francisco', Helvetica Neue, Arial, sans-serif;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
 }
 ol, ul {
   list-style: none;
@@ -44,7 +60,7 @@ table {
 }
 
 html {
-  font-size: 80%;
+  font-size: 62.5%;
   box-sizing: border-box;
 }
 

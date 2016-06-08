@@ -17,7 +17,6 @@ export const addVote = (data) => {
 
 export const countVotes = (id) =>{
   let headers = new Headers({'x-auth-token': token.get()});
-
   return fetch(`${base}?project=${id}`, {headers})
     .then(checkStatus);
 };

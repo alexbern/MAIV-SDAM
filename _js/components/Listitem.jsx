@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {basename} from '../globals';
+import {Link} from 'react-router';
 
 export default class Listitem extends React.Component {
 
@@ -9,17 +10,27 @@ export default class Listitem extends React.Component {
     super(props, context);
     this.state = {
     };
+    console.log(this.props);
   }
 
   render() {
+    let {name, id, description} = this.props;
     return (
-      <li className='listItem'>
-        <img src={`${basename}/assets/img/temp.png`} className='listItemImage'/>
-        <article className='listItemInfo'>
-          <h3>Lorem ipsum</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </article>
-      </li>
+      <Link to={`/project/${id}`}>
+        <div className="resultaat">
+          <div className="top">
+            <img src={`${basename}/#`}/>
+          </div>
+          <div className="bottom">
+            <p className="item_title">{name}</p>
+            <p className="item_beschrijving">{description}</p>
+            <div className="cta">
+              <a href="#">Toon me meer</a>
+              <img src="#" />
+            </div>
+          </div>
+        </div>
+      </Link>
     );
   }
 }
