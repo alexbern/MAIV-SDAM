@@ -112,7 +112,7 @@ export default class Project extends React.Component {
     let {id} = this.props.params;
     getProjectById(id)
       .then(project => {
-        this.setState({project: project});
+        this.setState({project: project['0']});
       })
       .then(()=>{
         if (isEmpty(this.state.project)) {
@@ -128,7 +128,7 @@ export default class Project extends React.Component {
   countVotes(){
     let {project} = this.state;
     if (project) {
-      countVotes(project['0'].id)
+      countVotes(project.id)
         .then(votes => {
           let voteCount = size(votes.votes).toString();
           this.setState({votes: voteCount});
@@ -143,7 +143,7 @@ export default class Project extends React.Component {
         return false;
       }else{
         let userid = token.content().user.id;
-        let id = project['0'].id;
+        let id = project.id;
         checkVote(userid, id)
           .then( votes => {
             if(isEmpty(votes.votes) === false) {
@@ -162,8 +162,11 @@ export default class Project extends React.Component {
   }
 
   render() {
-    let {votes} = this.state;
-    console.log(this.state);
+    let {votes, project} = this.state;
+    if (project) {
+      console.log(project);
+    }
+
     return (
       <div className="project_detail">
         <header>
@@ -174,17 +177,16 @@ export default class Project extends React.Component {
           <section className="inleiding">
             <div className="container">
               <div className="intro_woorden">
-                <p className="intro_woorden_tekst">De babbersmolen is helaas niet open voor bezichtiging.. Met dit project brengen we de molen naar naar Hoogtel. Zo kan je er voor een poosje in verblijven.</p>
+                <p className="intro_woorden_tekst">{project.intro}</p>
                 <div className="left">
-                  <img className="left_image_top" src={`${basename}/assets/img/molen_1.jpg`} />
+                  <img className="left_image_top" src={`${basename}/assets/img/molen_2.jpg`} />
                   <img className="left_image_bottom" src={`${basename}/assets/img/molen_2.jpg`} />
                 </div>
               </div>
               <div className="intro_tekst">
                 <p>
                   <img src={`${basename}/assets/img/molen_persoon.jpg`} />
-                   Ik, Bas Batenburg, ben al jaren molenaar in de Babbersmolen. Door de restauratie van de afgelopen jaren is helaas veel van het authentieke interieur van de Babbersmolen verloren gegaan. Met behulp van oud beeldmateriaal van de Babbersmbolen lijkt het me ontzettend leuk om een van de lege ruimtes in de Hoogstraat zo in te richten. Op deze manier komt de Babbersmolen weer tot leven. Een heerlijk weekendje weg met partner of het gezin is bestemd voor deze molen en maakt uw verblijf erg origineel. Daarbij is deze plek de ideale uitvalsbasis om Schiedam en/of Rotterdam te verkennen.Deze aparte logeerplek biedt plaats voor maximaal 6 personen met haar 3 slaapkamers. Deze vakantiewoning beschikt u over WiFi, een schattig tuintje met charmant terras waar u heerlijk kunt genieten van de natuur, een barbecue en voldoende mogelijkheden om de kinderen te vermaken mocht u die mee willen nemen voor een leuk weekendje weg.
-
+                  {project.description}
                 </p>
                 <div className="image">
                   <img className="right_image" src={`${basename}/assets/img/molen_3.jpg`} />
@@ -199,7 +201,7 @@ export default class Project extends React.Component {
             <div className="container">
               <div className="samenvatting">
                 <h3>kort samengevat</h3>
-                <p>Alsof u in de oude Babbersmolen aan het overnachten bent. Nagebouwd van oude foto’s en toch midden in de stad Schiedam. Aandacht voor authenticiteit, comfort en natuurlijk een knusse sfeer.</p>
+                <p>{project.shortdesc}</p>
               </div>
               <div className="punten">
                 <div className="stemmen">

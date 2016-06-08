@@ -1,17 +1,18 @@
 'use strict';
 
 import React from 'react';
+import {Link} from 'react-router';
 
 export default () => {
 
   return (
     <div className="navigatie not_sticky">
       <div className="container">
-        <a href="index.html" className="logo">hoogtel</a>
+        <Link to={`/home`} className="logo">hoogtel</Link>
         <nav>
           <ul>
-            <li><a href="verblijven.html">onze verblijven</a></li>
-            <li><a href="projecten.html">ingezonden projecten</a></li>
+            <li><Link to={`/overview?type=rooms`}>onze verblijven</Link></li>
+            <li><Link to={`/overview?type=projects`}>ingezonden projecten</Link></li>
             {/*<!--<li><a href="over.html">over hoogtel</a></li>-->*/}
           </ul>
         </nav>
