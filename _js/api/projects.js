@@ -20,8 +20,14 @@ export const searchProjects = (search) => {
     .then(checkStatus);
 };
 
+export const searchAllRooms = (search) => {
+  return fetch(`${base}/all?q=${search}`)
+    .then(checkStatus);
+};
+
 export default {
   getProjects,
   getProjectById,
-  searchProjects
+  searchProjects,
+  searchAllRooms
 };

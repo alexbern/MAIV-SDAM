@@ -50,19 +50,36 @@ export default class Login extends React.Component {
     return error;
   }
 
-
   render() {
-    let {error} = this.state;
+    // let {error} = this.state;
     return (
-      <form action="" onSubmit={(e)=>this.submitHandler(e)} className="login-form">
-        <h3>Login</h3>
-        <fieldset className="login-fieldset">
-          <label for="login-email">email:</label><input type="email" id="login-email" onChange={()=>this.changeHandler()} className="login-input" ref="email" name="login-email" />
-          <label for="login-password">password:</label><input type="password" id="login-password" onChange={()=>this.changeHandler()} className="login-input" ref="password" name="login-password" />
-        </fieldset>
-        <div className="error-alert">{error}</div>
-        <input type="submit" value="login" />
-      </form>
+        <main className='aanmelden'>
+          <div className="navigatie">
+            <div className="container">
+              <a href="index.html" className="logo">hoogtel</a>
+            </div>
+          </div>
+          <div className="formulier">
+            <h1 className="inner_page_title">Aanmelden</h1>
+            <form onSubmit={(e)=>this.submitHandler(e)} action=''>
+              <div className="form_item">
+                <label for="email">email</label>
+                <input type="email" id="email" placeholder="Wat is je e-mail adres?" onChange={()=>this.changeHandler()} ref='email'/>
+              </div>
+              <div className="form_item">
+                <label for="password">wachtwoord</label>
+                <input type="password" id="password" placeholder="Wat is je wachtwoord?" onChange={()=>this.changeHandler()} ref='password'/>
+              </div>
+              <input type="submit" value="Inloggen" />
+            </form>
+          </div>
+          <div className="afbeelding">
+            <img className="lachende_vrouw" src="assets/img/lachende_vrouw.png" />
+          </div>
+          <div className="page_title">
+            <h1>Aanmelden</h1>
+          </div>
+        </main>
     );
   }
 }

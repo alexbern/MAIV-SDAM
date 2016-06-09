@@ -34,12 +34,13 @@ class UserDAO extends DAO {
   public function insert($data) {
     $errors = $this->getValidationErrors($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `sdam_users` (`email`, `password`, `name`, `phone`)
-              VALUES (:email, :password, :name, :phone)";
+      $sql = "INSERT INTO `sdam_users` (`email`, `password`, `name`, `image`, `phone`)
+              VALUES (:email, :password, :name, :image, :phone)";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $data['email']);
       $stmt->bindValue(':password', $data['password']);
       $stmt->bindValue(':name', $data['name']);
+      $stmt->bindValue(':image', $data['image']['name']);
       $stmt->bindValue(':phone', $data['phone']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
