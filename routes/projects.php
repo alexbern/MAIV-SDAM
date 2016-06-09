@@ -21,6 +21,8 @@ $app->post($base, function($request, $response, $args){
     return $response;
   }
 
+  print_r('testje');
+
   $insertProject = $projectDAO->insertProject($data, $_FILES);
 
   if (empty($insertProject)) {
@@ -44,6 +46,7 @@ $app->post($base, function($request, $response, $args){
     $uploadErrors = [];
 
     foreach ($_FILES as $key => $image) {
+
       if (!file_exists(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS . $key . DS)) {
         mkdir(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS . $key . DS);
       }
