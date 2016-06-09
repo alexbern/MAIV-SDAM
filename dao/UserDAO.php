@@ -40,7 +40,7 @@ class UserDAO extends DAO {
       $stmt->bindValue(':email', $data['email']);
       $stmt->bindValue(':password', $data['password']);
       $stmt->bindValue(':name', $data['name']);
-      $stmt->bindValue(':image', $data['image']['name']);
+      $stmt->bindValue(':image', NULL);
       $stmt->bindValue(':phone', $data['phone']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();

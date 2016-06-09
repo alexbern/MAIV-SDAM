@@ -7,9 +7,13 @@ import token from '../auth/token';
 
 let base = `${basename}/api/users`;
 
+let whitelist = {
+  POST: ['name', 'password', 'email', 'phone', 'image']
+};
+
 export const insert = data => {
   let method = 'POST';
-  let body = buildBody(data, ['name', 'password', 'email', 'phone', 'image']);
+  let body = buildBody(data, whitelist.POST);
   let headers = new Headers({'Content-Type': 'application/json'});
 
   return fetch(base, {method, body, headers})

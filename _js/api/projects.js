@@ -1,9 +1,14 @@
 'use strict';
 import fetch from 'isomorphic-fetch';
-import {buildBody, checkStatus} from '../util';
+import {checkStatus, extraBuildBody} from '../util';
 import {basename} from '../globals/';
+import token from '../auth/token';
 
 let base = `${basename}/api/projects`;
+
+let whitelist = {
+  POST: ['image', 'ownerid', 'description', 'shortdesc', 'intro']
+};
 
 export const getProjects = () => {
   return fetch(`${base}`)
@@ -25,9 +30,19 @@ export const searchAllRooms = (search) => {
     .then(checkStatus);
 };
 
+export const insert = (data) => {
+  let method = 'POST';
+  let headers = new Headers({ 'x-auth-token': token.get()});
+  let body = extraBuildBody(data, whitelist.POST);
+
+  return fetch(base, {method, body, headers})
+    .then(checkStatus);
+};
+
 export default {
   getProjects,
   getProjectById,
   searchProjects,
-  searchAllRooms
+  searchAllRooms,
+  insert
 };
