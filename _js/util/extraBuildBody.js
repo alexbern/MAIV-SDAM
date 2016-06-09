@@ -15,6 +15,6 @@ export default (data, values, extend) => {
     fd.append(key, data[key]);
   }
 
-  return JSON.stringify(data);
+  return fd;
 
 };

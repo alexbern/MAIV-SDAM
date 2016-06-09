@@ -4,6 +4,7 @@ import React from 'react';
 import {Navigation, Stickynav, Footer} from '../components';
 import token from '../auth/token';
 import {isEmpty} from 'lodash';
+import {insert} from '../api/projects';
 
 export default class Submit extends React.Component {
 
@@ -58,7 +59,7 @@ export default class Submit extends React.Component {
     e.preventDefault();
     let errors = this.validate();
     if (isEmpty(errors)) {
-      console.log('posten');
+      insert(this.state);
     }else{
       console.error(errors);
       this.setState({errors: errors});
