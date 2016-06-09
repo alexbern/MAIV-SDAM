@@ -1,7 +1,7 @@
 'use strict';
 
 import fetch from 'isomorphic-fetch';
-import {extraBuildBody, checkStatus} from '../util';
+import {buildBody, checkStatus} from '../util';
 import {basename} from '../globals/';
 import token from '../auth/token';
 
@@ -13,7 +13,7 @@ let whitelist = {
 
 export const insert = data => {
   let method = 'POST';
-  let body = extraBuildBody(data, whitelist.POST);
+  let body = buildBody(data, whitelist.POST);
   let headers = new Headers({'Content-Type': 'application/json'});
 
   return fetch(base, {method, body, headers})

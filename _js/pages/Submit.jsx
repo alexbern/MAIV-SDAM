@@ -83,6 +83,12 @@ export default class Submit extends React.Component {
               <div className="left">
                 <div className="form_item">
                   <div className="top">
+                    <label>titel</label>
+                  </div>
+                  <textarea placeholder="Geef hier een inleiding van je project op" ref="title" onChange={()=>this.changeHandler()}></textarea>
+                </div>
+                <div className="form_item">
+                  <div className="top">
                     <label>commentaar</label>
                     <p>tekens 0 / 245</p>
                   </div>
@@ -119,10 +125,6 @@ export default class Submit extends React.Component {
                 <div className="form_item">
                   <label for="image_4">Voeg een foto toe</label>
                   <input id="image_4" type="file" />
-                </div>
-                <div className="form_item">
-                  <label for="image_5">Voeg een foto toe</label>
-                  <input id="image_5" type="file" />
                 </div>
               </div>
             </div>
