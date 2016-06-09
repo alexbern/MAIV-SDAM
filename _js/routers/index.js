@@ -3,7 +3,7 @@
 import React from 'react';
 import {Router, Route, IndexRedirect, useRouterHistory} from 'react-router';
 
-import {App, Home, Register, Login, Overview, Project, Room, Review, Submit} from '../pages/';
+import {App, Home, Register, Login, Rooms, Projects, Project, Room, Review, Submit} from '../pages/';
 import {createHistory} from 'history';
 import {basename} from '../globals/';
 import token from '../auth/token';
@@ -31,7 +31,8 @@ export default () => {
         <Route path="project/:id" component={Project}/>
         <Route path="room/:id" component={Room}/>
         <Route path="review/:id" component={Review}/>
-        <Route path="overview" component={Overview}/>
+        <Route path="rooms" component={Rooms}/>
+        <Route path="projects" component={Projects}/>
         <Route path="submit" component={Submit} onEnter={isLoggedIn}/>
         <Route path="logout" onEnter={logout}/>
       </Route>

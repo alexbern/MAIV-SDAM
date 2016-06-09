@@ -11,9 +11,8 @@ export default () => {
         <Link to={`/home`} className="logo">hoogtel</Link>
         <nav>
           <ul>
-            <li><Link to={`/overview?type=rooms`}>onze verblijven</Link></li>
-            <li><Link to={`/overview?type=projects`}>ingezonden projecten</Link></li>
-            {/*<!--<li><a href="over.html">over hoogtel</a></li>-->*/}
+            <li><Link to={`/rooms`}>onze verblijven</Link></li>
+            <li><Link to={`/projects`}>ingezonden projecten</Link></li>
           </ul>
         </nav>
         <div className="boek_btn">
