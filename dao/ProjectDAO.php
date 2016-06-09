@@ -36,18 +36,25 @@ class ProjectDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function insertProject($data, $img){
+  public function insertProject($data, $images){
     $errors = $this->getValidationErrors($data);
+    print_r($images);
     if(empty($errors)) {
-      $sql = "INSERT INTO `sdam_projects` (`name`, `owner_id`, `shortdesc`, `intro`, `description`, `img1`)
-              VALUES (:name, :owner_id, :shortdesc, :intro, :description, :img)";
+      $sql = "INSERT INTO `sdam_projects` (`name`, `owner_id`, `shortdesc`, `intro`, `description`, `img1`, `img2`, `img3`, `img4`, `img5`)
+              VALUES (:name, :owner_id, :shortdesc, :intro, :description, :imgone, :imgtwo, :imgthree, :imgfour, :imgfive)";
       $stmt = $this->pdo->prepare($sql);
-      $stmt->bindValue(':name', 'Nieuw Project');
+      $stmt->bindValue(':name', $data['title']);
       $stmt->bindValue(':owner_id', $data['ownerid']);
       $stmt->bindValue(':shortdesc', $data['shortdesc']);
       $stmt->bindValue(':intro', $data['intro']);
       $stmt->bindValue(':description', $data['description']);
-      $stmt->bindValue(':img', $img);
+
+      $stmt->bindValue(':imgone', $images['imageone']['name']);
+      $stmt->bindValue(':imgtwo', $images['imagetwo']['name']);
+      $stmt->bindValue(':imgthree', $images['imagethree']['name']);
+      $stmt->bindValue(':imgfour', $images['imagefour']['name']);
+      $stmt->bindValue(':imgfive', $images['imagefive']['name']);
+
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectById($insertedId);
