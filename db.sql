@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 09, 2016 at 02:45 PM
+-- Generation Time: Jun 10, 2016 at 01:52 AM
 -- Server version: 5.5.42
 -- PHP Version: 7.0.0
 
@@ -58,7 +58,14 @@ CREATE TABLE `sdam_projects` (
   `img3` varchar(255) DEFAULT NULL,
   `img4` varchar(255) DEFAULT NULL,
   `img5` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sdam_projects`
+--
+
+INSERT INTO `sdam_projects` (`id`, `name`, `owner_id`, `shortdesc`, `intro`, `description`, `img1`, `img2`, `img3`, `img4`, `img5`) VALUES
+(1, 'De Babbersmolen', 1, 'Alsof u in de oude Babbersmolen aan het overnachten bent. Nagebouwd van oude foto’s en toch midden in de stad Schiedam. Aandacht voor authenticiteit, comfort en natuurlijk een knusse sfeer.', 'De babbersmolen is helaas niet open voor bezichtiging.. Met dit project brengen we de molen naar naar Hoogtel. Zo kan je er voor een poosje in verblijven.', 'Ik, Bas Batenburg, ben al jaren molenaar in de Babbersmolen. Door de restauratie van de afgelopen jaren is helaas veel van het authentieke interieur van de Babbersmolen verloren gegaan. Met behulp van oud beeldmateriaal van de Babbersmbolen lijkt het me ontzettend leuk om een van de lege ruimtes in de Hoogstraat zo in te richten. Op deze manier komt de Babbersmolen weer tot leven. Een heerlijk weekendje weg met partner of het gezin is bestemd voor deze molen en maakt uw verblijf erg origineel. Daarbij is deze plek de ideale uitvalsbasis om Schiedam en/of Rotterdam te verkennen.Deze aparte logeerplek biedt plaats voor maximaal 6 personen met haar 3 slaapkamers. Deze vakantiewoning beschikt u over WiFi, een schattig tuintje met charmant terras waar u heerlijk kunt genieten van de natuur, een barbecue en voldoende mogelijkheden om de kinderen te vermaken mocht u die mee willen nemen voor een leuk weekendje weg.', 'molen.jpg', 'molen_1.jpg', 'molen_2.jpg', 'molen_persoon.jpg', 'molen_3.jpg');
 
 -- --------------------------------------------------------
 
@@ -132,14 +139,14 @@ CREATE TABLE `sdam_users` (
   `image` varchar(255) DEFAULT NULL,
   `phone` varchar(255) NOT NULL,
   `role` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sdam_users`
 --
 
 INSERT INTO `sdam_users` (`id`, `email`, `password`, `name`, `image`, `phone`, `role`) VALUES
-(1, 'itsalexbernard@gmail.com', '$2a$12$3R.IkW.aq7Kn/7uT4jggEOMgH1sqh57i6UBbu2/aDh5ZjN.YT.lhq', 'Alex Bernard', NULL, '0494113273', 0);
+(1, 'itsalexbernard@gmail.com', '$2a$12$wCPORnY9QJnk3m47CUkCgOI16ecwXKk8ikDWQrQ5lXk7LmKk9m.ji', 'Alex', NULL, '0494113273', 1);
 
 -- --------------------------------------------------------
 
@@ -151,7 +158,14 @@ CREATE TABLE `sdam_votes` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sdam_votes`
+--
+
+INSERT INTO `sdam_votes` (`id`, `user_id`, `project_id`) VALUES
+(7, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -206,7 +220,7 @@ ALTER TABLE `sdam_newsletters`
 -- AUTO_INCREMENT for table `sdam_projects`
 --
 ALTER TABLE `sdam_projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sdam_reviews`
 --
@@ -221,12 +235,12 @@ ALTER TABLE `sdam_rooms`
 -- AUTO_INCREMENT for table `sdam_users`
 --
 ALTER TABLE `sdam_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sdam_votes`
 --
 ALTER TABLE `sdam_votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

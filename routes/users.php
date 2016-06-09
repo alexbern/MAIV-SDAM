@@ -67,15 +67,18 @@ $app->post($base, function($request, $response, $args){
   $user = $request->getParsedBody();
 
   $existing = $userDAO->selectByEmail($user['email']);
+
   if (!empty($existing)) {
-    $response = $response->withStatus(400);
-    exit();
-    die();
+    $data = array('error' => 'Email al in gebruik');
+
+    $response->getBody()->write(json_encode($data));
+    return $response->withHeader('Content-Type','application/json')->withStatus(400);
   }else{
 
     if($user['password']){
       $user['password'] = BCrypt::hash($user['password']);
     }
+
       $insertedUser = $userDAO->insert($user);
       if(empty($insertedUser)) {
         $errors = array();

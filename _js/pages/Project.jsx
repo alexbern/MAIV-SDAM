@@ -56,7 +56,7 @@ export default class Project extends React.Component {
   renderNextProject(){
     let {nextProject} = this.state;
     if (!isEmpty(nextProject)) {
-      let {id, name, img1} = nextProject['0'];
+      let {id, name, img1, owner_id} = nextProject['0'];
       return (
         <div className="next_project project">
           <div className="tekst">
@@ -64,7 +64,7 @@ export default class Project extends React.Component {
             <p className="titel_woning">{name}</p>
           </div>
           <div className="afbeelding">
-            <img src={`${basename}/assets/img/${img1}`} />
+            <img src={`${basename}/uploads/${owner_id}/projects/${id}/imageone/${img1}`} />
           </div>
           <div className="cta" onClick={()=>this.renderNewProject(id)}>
             <p>volgend project</p>
@@ -83,7 +83,8 @@ export default class Project extends React.Component {
   renderPreviousProject(){
     let {previousProject} = this.state;
     if (!isEmpty(previousProject)) {
-      let {id, name, img1} = previousProject['0'];
+      console.log(previousProject);
+      let {id, name, img1, owner_id} = previousProject['0'];
       return (
         <div className="previous_project project">
           <div className="tekst">
@@ -91,7 +92,7 @@ export default class Project extends React.Component {
             <p className="titel_woning">{name}</p>
           </div>
           <div className="afbeelding" ref='previous'>
-            <img src={`${basename}/assets/img/${img1}`} />
+            <img src={`${basename}/uploads/${owner_id}/projects/${id}/imageone/${img1}`} />
           </div>
           <div className="cta" onClick={()=>this.renderNewProject(id)}>
             <img className="left_arrow" src={`${basename}/assets/img/arrow.svg`} />
@@ -102,7 +103,6 @@ export default class Project extends React.Component {
     }else{
       return (
         <div className="previous_project project">
-
         </div>
       );
     }
@@ -112,7 +112,11 @@ export default class Project extends React.Component {
     let {id} = this.props.params;
     getProjectById(id)
       .then(project => {
-        this.setState({project: project['0']});
+        if (isEmpty(project)){
+          this.context.router.push('/projects');
+        }else{
+          this.setState({project: project['0']});
+        }
       })
       .then(()=>{
         if (isEmpty(this.state.project)) {
@@ -223,7 +227,6 @@ export default class Project extends React.Component {
           </section>
         </main>
         <Footer />
-        <script type="text/javascript" src="js/script.js"></script>
       </div>
     );
   }

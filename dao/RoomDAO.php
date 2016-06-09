@@ -20,6 +20,13 @@ class RoomDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function selectRandomRooms() {
+    $sql = "SELECT * FROM `sdam_rooms` ORDER BY RAND() LIMIT 6";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function selectById($id) {
     $sql = "SELECT *
             FROM `sdam_rooms` where `id` = :id";

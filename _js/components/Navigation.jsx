@@ -16,7 +16,7 @@ export default () => {
           </ul>
         </nav>
         <div className="boek_btn">
-          <a href="#">boeken</a>
+          <Link to={`/submit`}>deelnemen</Link>
         </div>
       </div>
     </div>
