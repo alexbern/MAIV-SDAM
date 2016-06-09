@@ -72,15 +72,10 @@ $app->post($base, function($request, $response, $args){
     exit();
     die();
   }else{
-  
-
-
 
     if($user['password']){
       $user['password'] = BCrypt::hash($user['password']);
     }
-
-
       $insertedUser = $userDAO->insert($user);
       if(empty($insertedUser)) {
         $errors = array();
@@ -88,21 +83,21 @@ $app->post($base, function($request, $response, $args){
         $response->getBody()->write(json_encode($errors));
         $response = $response->withStatus(400);
       }else{
-        print_r($user);
-        if (!file_exists(WWW_ROOT . 'uploads' . DS . $insertedUser['id'] . DS)) {
-          mkdir(WWW_ROOT . 'uploads' . DS . $insertedUser['id'] . DS);
-        }
-
-        $uploadDir = WWW_ROOT . 'uploads' . DS . $insertedUser['id'] . DS;
-
-        $uploadImgFile = $uploadDir . basename($user['image']['name']);
-
-        if (move_uploaded_file($user['image']['tmp_name'], $uploadImgFile)) {
+        // print_r($user);
+        // if (!file_exists(WWW_ROOT . 'uploads' . DS . $insertedUser['id'] . DS)) {
+        //   mkdir(WWW_ROOT . 'uploads' . DS . $insertedUser['id'] . DS);
+        // }
+        //
+        // $uploadDir = WWW_ROOT . 'uploads' . DS . $insertedUser['id'] . DS;
+        //
+        // $uploadImgFile = $uploadDir . basename($user['image']['name']);
+        //
+        // if (move_uploaded_file($user['image']['tmp_name'], $uploadImgFile)) {
           $response->getBody()->write(json_encode($insertedUser));
           $response = $response->withStatus(201);
-        }else{
-          $response = $response->withStatus(501);
-        }
+        // }else{
+        //   $response = $response->withStatus(501);
+        // }
       }
   }
 
