@@ -77,7 +77,6 @@ export default class Projects extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="projecten">
         <header>

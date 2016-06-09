@@ -21,31 +21,52 @@ $app->post($base, function($request, $response, $args){
     return $response;
   }
 
-  $insertProject = $projectDAO->insertProject($data, $_FILES['image']['name']);
+  $insertProject = $projectDAO->insertProject($data, $_FILES);
+
   if (empty($insertProject)) {
     $errors = array();
     $errors['errors'] = $projectDAO->getValidationErrors($insertProject);
     $response->getBody()->write(json_encode($errors));
     $response = $response->withStatus(400);
   }else{
-    print_r($insertProject);
+    if (!file_exists(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS)) {
+      mkdir(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS);
+    }
+
+    if (!file_exists(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS)) {
+      mkdir(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS);
+    }
+
     if (!file_exists(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS)) {
       mkdir(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS);
     }
 
-    $uploadDir = WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS;
+    $uploadErrors = [];
 
-    $uploadImgFile = $uploadDir . basename($_FILES['image']['name']);
+    foreach ($_FILES as $key => $image) {
+      if (!file_exists(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS . $key . DS)) {
+        mkdir(WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS . $key . DS);
+      }
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadImgFile)) {
+      $uploadDir = WWW_ROOT . 'uploads' . DS . $data['ownerid'] . DS . 'projects' . DS . $insertProject['0']['id'] . DS . $key . DS;
+
+      $uploadImgFile = $uploadDir . basename($image['name']);
+
+      if (move_uploaded_file($image['tmp_name'], $uploadImgFile)) {
+
+      }else{
+        $uploadErrors = [$key => 'not uploaded'];
+      }
+    }
+
+    if (empty($uploaderrors)) {
       $response->getBody()->write(json_encode($insertProject));
       $response = $response->withStatus(201);
     }else{
       $response = $response->withStatus(501);
     }
+
   }
-
-
 
   return $response->withHeader('Content-Type','application/json');
 

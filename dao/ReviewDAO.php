@@ -20,7 +20,7 @@ class ReviewDAO extends DAO {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
-
+  
   public function insert($data) {
     $errors = $this->getValidationErrors($data);
     if(empty($errors)) {

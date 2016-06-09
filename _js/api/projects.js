@@ -7,7 +7,7 @@ import token from '../auth/token';
 let base = `${basename}/api/projects`;
 
 let whitelist = {
-  POST: ['image', 'ownerid', 'description', 'shortdesc', 'intro']
+  POST: ['imageone', 'imagetwo', 'imagethree', 'imagefour', 'imagefive', 'ownerid', 'description', 'shortdesc', 'intro', 'title']
 };
 
 export const getProjects = () => {

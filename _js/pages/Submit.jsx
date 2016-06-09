@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Navigation, Stickynav, Footer} from '../components';
 import token from '../auth/token';
 import {isEmpty} from 'lodash';
@@ -8,10 +8,13 @@ import {insert} from '../api/projects';
 
 export default class Submit extends React.Component {
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+
   constructor(props, context) {
     super(props, context);
     this.state = {
-      image: ''
     };
   }
 
@@ -21,27 +24,61 @@ export default class Submit extends React.Component {
     });
   }
 
-  onFileChangeHandler(e){
-    this.setState({image: e.currentTarget.files[0]});
+  onFileChangeHandlerOne(e){
+    this.setState({imageone: e.currentTarget.files[0]});
+    // let filepath = e.currentTarget.files['0'];
+    // header.style.backgroundImage = `url('${filepath}')`;
+  }
+
+  onFileChangeHandlerTwo(e){
+    this.setState({imagetwo: e.currentTarget.files[0]});
+  }
+
+  onFileChangeHandlerThree(e){
+    this.setState({imagethree: e.currentTarget.files[0]});
+  }
+
+  onFileChangeHandlerFour(e){
+    this.setState({imagefour: e.currentTarget.files[0]});
+  }
+
+  onFileChangeHandlerFive(e){
+    this.setState({imagefive: e.currentTarget.files[0]});
   }
 
   changeHandler(){
-    let {intro, description, shortdesc} = this.refs;
+    let {intro, description, shortdesc, title} = this.refs;
     this.setState({
       description: description.value,
       shortdesc: shortdesc.value,
-      intro: intro.value
+      intro: intro.value,
+      title: title.value
     });
   }
 
   validate(){
-    let {description, shortdesc, ownerid, intro, image} = this.state;
+    let {description, shortdesc, ownerid, intro, imageone, imagetwo, imagethree, imagefour, imagefive, title} = this.state;
     let errors = {};
     if (!description) {
       errors.description = 'geen beschrijving gegeven';
     }
-    if (!image) {
-      errors.image = 'geen foto gegeven';
+    if (!title) {
+      errors.title = 'geen titel gegeven';
+    }
+    if (!imageone) {
+      errors.imageone = 'foto 1 ontbreekt';
+    }
+    if (!imagetwo) {
+      errors.imagetwo = 'foto 2 ontbreekt';
+    }
+    if (!imagethree) {
+      errors.imagethree = 'foto 3 ontbreekt';
+    }
+    if (!imagefour) {
+      errors.imagefour = 'foto 4 ontbreekt';
+    }
+    if (!imagefive) {
+      errors.imagefive = 'foto 5 ontbreekt';
     }
     if (!shortdesc) {
       errors.shortdesc = 'geen commentaar gegeven';
@@ -59,7 +96,8 @@ export default class Submit extends React.Component {
     e.preventDefault();
     let errors = this.validate();
     if (isEmpty(errors)) {
-      insert(this.state);
+      insert(this.state)
+        .then(this.context.router.push('/projects'));
     }else{
       console.error(errors);
       this.setState({errors: errors});
@@ -73,7 +111,7 @@ export default class Submit extends React.Component {
         <header>
           <Navigation />
           <div className="header_tekst">
-            <label className="btn btn_fill">Voeg een omslagfoto toe<input type='file' name='img1' accept="image/*" ref="file" onChange={(e)=>this.onFileChangeHandler(e)}/></label>
+            <label className="btn btn_fill">Voeg een omslagfoto toe<input type='file' name='img1' accept="image/*" ref="file" onChange={(e)=>this.onFileChangeHandlerOne(e)}/></label>
           </div>
         </header>
         <Stickynav />
@@ -111,20 +149,16 @@ export default class Submit extends React.Component {
               </div>
               <div className="right">
                 <div className="form_item">
-                  <label for="image_1">Voeg een foto toe</label>
-                  <input id="image_1" type="file" />
+                  <label for="image_1" >Voeg een foto toe<input id="image_1" type="file" onChange={(e)=>this.onFileChangeHandlerTwo(e)}/></label>
                 </div>
                 <div className="form_item">
-                  <label for="image_2">Voeg een foto toe</label>
-                  <input id="image_2" type="file" />
+                  <label for="image_2">Voeg een foto toe<input id="image_2" type="file" onChange={(e)=>this.onFileChangeHandlerThree(e)}/></label>
                 </div>
                 <div className="form_item">
-                  <label for="image_3">Voeg een foto toe</label>
-                  <input id="image_3" type="file" />
+                  <label for="image_3">Voeg een foto toe<input id="image_3" type="file" onChange={(e)=>this.onFileChangeHandlerFour(e)}/></label>
                 </div>
                 <div className="form_item">
-                  <label for="image_4">Voeg een foto toe</label>
-                  <input id="image_4" type="file" />
+                  <label for="image_4">Voeg een foto toe<input id="image_4" type="file" onChange={(e)=>this.onFileChangeHandlerFive(e)}/></label>
                 </div>
               </div>
             </div>

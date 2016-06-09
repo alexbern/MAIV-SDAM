@@ -32,9 +32,9 @@ export default class Project extends React.Component {
 
   componentDidMount(){
     let {backgroundimg} = this.refs;
-    let {img1} = this.props;
+    let {img1, owner_id, id} = this.props;
     backgroundimg.style.backgroundSize = `cover`;
-    backgroundimg.style.backgroundImage = `url(${basename}/assets/img/${img1})`;
+    backgroundimg.style.backgroundImage = `url(${basename}/uploads/${owner_id}/projects/${id}/imageone/${img1})`;
   }
 
   vote(){
