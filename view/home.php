@@ -24,6 +24,7 @@
             s.parentNode.insertBefore(wf, s);
         })();
     </script>
+    <link rel="icon" type="image/png" href="<?php echo $basepath;?>/assets/img/favicon.jpg"/>
     <link rel="stylesheet" href="<?php echo $basepath;?>/css/style.css" media="screen" charset="utf-8">
   </head>
   <body>

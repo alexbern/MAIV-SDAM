@@ -5,6 +5,7 @@ import {isEmpty} from 'lodash';
 import {login} from '../api/auth';
 import {insert} from '../api/users';
 import token from '../auth/token';
+import {Link} from 'react-router';
 
 export default class Register extends React.Component {
 
@@ -89,7 +90,7 @@ export default class Register extends React.Component {
         <main className='registreren'>
           <div className="navigatie">
             <div className="container">
-              <a href="index.html" className="logo">hoogtel</a>
+              <Link to={`/home`} className="logo">hoogtel</Link>
             </div>
           </div>
           <div className="formulier">

@@ -24,7 +24,7 @@ export default class Review extends React.Component {
       beauty: '',
       interior: '',
       accomo: '',
-      value: '',
+      value: ''
     };
   }
 
@@ -45,7 +45,7 @@ export default class Review extends React.Component {
             if (room.room === false) {
               this.context.router.push('/home');
             }
-          })
+          });
       }
     }
   }
