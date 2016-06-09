@@ -4,6 +4,8 @@ import React from 'react';
 import {countVotes} from '../api/votes';
 import Emitter from '../events/';
 import {size} from 'lodash';
+import {Link} from 'react-router';
+import {basename} from '../globals/';
 
 export default class Project extends React.Component {
 
@@ -28,18 +30,34 @@ export default class Project extends React.Component {
     this.countVotes();
   }
 
+  componentDidMount(){
+    let {backgroundimg} = this.refs;
+    let {img1} = this.props;
+    backgroundimg.style.backgroundSize = `cover`;
+    backgroundimg.style.backgroundImage = `url(${basename}/assets/img/${img1})`;
+  }
+
   vote(){
     let {id} = this.props;
     Emitter.emit('vote', id);
   }
 
   render() {
-    let {name} = this.props;
-    let {votes} = this.state;
+    let {shortdesc, name, id} = this.props;
     return (
-      <div>{name}
-        <input type='submit' onClick={() => this.vote()} value='vote'/>
-        votes: {votes}
+      <div className="resultaat">
+        <Link to={`/project/${id}`}>
+          <div className="top" ref='backgroundimg'>
+          </div>
+          <div className="bottom">
+            <p className="item_title">{name}</p>
+            <p className="item_beschrijving">{shortdesc}</p>
+            <div className="cta meer">
+              <a href="#">Toon me meer</a>
+              <img src={`${basename}/assets/img/arrow.svg`} />
+            </div>
+          </div>
+        </Link>
       </div>
     );
   }

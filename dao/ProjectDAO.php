@@ -27,4 +27,12 @@ class ProjectDAO extends DAO {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function getExtraSearches($limit) {
+    $sql = "SELECT * FROM `sdam_projects` ORDER BY RAND() LIMIT :amount";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':amount', $limit);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

@@ -48,8 +48,8 @@ export default class Project extends React.Component {
   renderNewProject(id){
     this.context.router.push(`/project/${id}`);
     this.componentWillMount();
-    // this.renderNextProject();
-    // this.renderPreviousProject();
+    this.renderNextProject();
+    this.renderPreviousProject();
     this.forceUpdate();
   }
 
@@ -83,15 +83,15 @@ export default class Project extends React.Component {
   renderPreviousProject(){
     let {previousProject} = this.state;
     if (!isEmpty(previousProject)) {
-      let {id, name} = previousProject['0'];
+      let {id, name, img1} = previousProject['0'];
       return (
         <div className="previous_project project">
           <div className="tekst">
             <p className="type_woning">kamer</p>
             <p className="titel_woning">{name}</p>
           </div>
-          <div className="afbeelding">
-            <img src="#" />
+          <div className="afbeelding" ref='previous'>
+            <img src={`${basename}/assets/img/${img1}`} />
           </div>
           <div className="cta" onClick={()=>this.renderNewProject(id)}>
             <img className="left_arrow" src={`${basename}/assets/img/arrow.svg`} />
@@ -166,7 +166,7 @@ export default class Project extends React.Component {
     if (project) {
       console.log(project);
     }
-
+    console.log(this.state);
     return (
       <div className="project_detail">
         <header>
@@ -194,9 +194,6 @@ export default class Project extends React.Component {
               </div>
             </div>
           </section>
-          {/*<!-- <section className="toekomstplannen">
-            <p>I stand with the utmost humility. We are so blessed!!! All praises and blessings to the families of people who never gave up on dreams in the past the press/old guard and powers that be would have silenced me a long time ago but I have a form of social immunity. Don't be scared of the truth because we need to restart the human foundation in truth. I’m really excited to get our first best dressed.</p>
-          </section> -->*/}
           <section className="afsluiting">
             <div className="container">
               <div className="samenvatting">

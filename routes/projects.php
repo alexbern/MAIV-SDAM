@@ -4,23 +4,6 @@ $base = '/api/projects';
 
 $app->get($base, function($request, $response, $args){
 
-  // $token = new Token();
-  // $token->setFromRequest($request);
-  //
-  // if(!$token->verify()) {
-  //   $response = $response->withStatus(401);
-  //   return $response;
-  // }
-  //
-  // if($token->getUser()->id) {
-  //   $gardenDAO = new GardenDAO();
-  //   $data = array();
-  //   $data['gardens'] = $gardenDAO->selectAllByUserId($token->getUser()->id);
-  // } else {
-  //   $response = $response->withStatus(403);
-  //   return $response;
-  // }
-
   $query = $request->getQueryParams();
 
   if (!empty($query) && !empty($query['q'])) {
@@ -38,24 +21,33 @@ $app->get($base, function($request, $response, $args){
 
 });
 
-$app->get($base . '/{id}', function($request, $response, $args){
+$app->get($base . '/all', function($request, $response, $args){
 
-  // $token = new Token();
-  // $token->setFromRequest($request);
-  //
-  // if(!$token->verify()) {
-  //   $response = $response->withStatus(401);
-  //   return $response;
-  // }
-  //
-  // if($token->getUser()->id) {
-  //   $gardenDAO = new GardenDAO();
-  //   $data = array();
-  //   $data['gardens'] = $gardenDAO->selectAllByUserId($token->getUser()->id);
-  // } else {
-  //   $response = $response->withStatus(403);
-  //   return $response;
-  // }
+  $query = $request->getQueryParams();
+
+  if (!empty($query) && !empty($query['q'])) {
+    $projectDAO = new ProjectDAO();
+    $data = array();
+    $data['projects'] = $projectDAO -> searchAllProjects($query['q']);
+  }else{
+    $projectDAO = new ProjectDAO();
+    $data = array();
+    $data['projects'] = $projectDAO -> selectAll();
+    if (sizeof($data['projects']) < 20) {
+      $currentArrayLength = sizeOf($data['projects']);
+      $otherSearches = $projectDAO->getExtraSearches(20-$currentArrayLength);
+      $selectedSearches = array_merge($data['projects'], $otherSearches);
+      $data['projects'] = $selectedSearches;
+    }
+  }
+
+  $response->getBody()->write(json_encode($data));
+  return $response->withHeader('Content-Type','application/json');
+
+});
+
+
+$app->get($base . '/{id}', function($request, $response, $args){
 
   $projectDAO = new ProjectDAO();
   $project = $projectDAO -> selectById($args['id']);

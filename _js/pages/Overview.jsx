@@ -1,14 +1,14 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import {getProjects} from '../api/projects';
-import {getRooms, searchRooms} from '../api/rooms';
+import {getProjects, searchProjects, searchAllProjects} from '../api/projects';
+import {getRooms, searchRooms, searchAllRooms} from '../api/rooms';
 import {addVote, checkVote, deleteVote} from '../api/votes';
-import {searchProjects} from '../api/projects';
-import {Project} from '../components';
+import {Navigation, Stickynav, Footer, Project, Room} from '../components';
 import {isEmpty} from 'lodash';
 import Emitter from '../events/';
 import token from '../auth/token';
+import {basename} from '../globals/';
 
 export default class Overview extends React.Component {
 
@@ -60,7 +60,7 @@ export default class Overview extends React.Component {
     }else{
       if (window.location.search === '?type=rooms') {
         //zoek kamers
-        searchRooms(this.state.search)
+        searchAllRooms(this.state.search)
           .then(projects => this.setState({projects: projects}));
       }
       if (window.location.search === '?type=projects') {
@@ -90,9 +90,20 @@ export default class Overview extends React.Component {
     }
   }
 
+  componentDidMount(){
+    let {parentdiv} = this.refs;
+    parentdiv.className += ' projecten';
+  }
+
   renderItems(){
     if (window.location.search === '?type=rooms') {
       console.log('render rooms');
+      let {projects} = this.state;
+      if (projects) {
+        return projects.rooms.map((room, i)=>{
+          return <Room {...room} key={i}/>;
+        });
+      }
     }
 
     if (window.location.search === '?type=projects') {
@@ -106,13 +117,40 @@ export default class Overview extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
-      <div>
-        <div>Dit is de overview</div>
-        {this.renderItems()}
-        <form className='search-form' action='#' onSubmit={(e)=>this.submitHandler(e)}>
-          <input type='text' className='search-input' onChange={()=>this.changeHandler()} ref="search" name='search' placeholder='Naar wat voor woning ben je op zoek?'/><button className='search-submit'>zoeken</button>
-        </form>
+      <div className="verblijven" ref='parentdiv'>
+        <header>
+          <Navigation />
+          <div className="header_images">
+            <div className="header_images_container">
+              <div className="text_container">
+                <h1>Thuis de hoogstraat</h1>
+                <p>Reserveer een verblijf in Hoogtel,<br/> en ervaar Schiedam alsof je er zelf leeft.</p>
+              </div>
+              <div className="images_container">
+                <img className="vrienden" src={`${basename}/assets/img/vrienden.png`} />
+              </div>
+            </div>
+          </div>
+          <div className="header_background">
+            {/*<img src="#" />*/}
+          </div>
+        </header>
+        <Stickynav />
+        <main>
+          <form className="search" onSubmit={(e)=>this.submitHandler(e)}>
+            <img src={`${basename}/assets/img/home.svg`} />
+            <input type="text" placeholder="Naar wat voor verblijf ben je op zoek?" autofocus ref="search" onChange={()=>this.changeHandler()} />
+            <input type="submit" value="zoeken" />
+          </form>
+          <div className="resultaten">
+            <div className="container">
+              {this.renderItems()}
+            </div>
+          </div>
+        </main>
+        <Footer />
       </div>
     );
   }

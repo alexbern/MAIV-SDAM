@@ -429,7 +429,6 @@ main .container {
   display: flex;
   -ms-flex-direction: row;
       flex-direction: row;
-  height: 34rem;
 }
 
 .homepage .resultaat:last-child {
@@ -437,7 +436,10 @@ main .container {
 }
 
 .homepage .resultaat {
+  min-width: 33%;
   max-width: 33%;
+  margin-bottom: 5rem;
+  margin-top: 5rem;
 }
 
 .homepage .resultaat .item_beschrijving {
@@ -536,6 +538,7 @@ main .container {
       flex-direction: column;
   -ms-flex-pack: end;
       justify-content: flex-end;
+  margin-top: 3rem;
 }
 
 .verblijf .container .top {
@@ -913,6 +916,7 @@ footer a {
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
+  z-index: 3;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -1809,6 +1813,7 @@ footer a {
 .projecten .heart, .verblijven .heart {
   min-height: 4rem;
   min-width: 4rem;
+  width: 2rem;
   background-color: #FC0E5F;
   display: -ms-flexbox;
   display: flex;
@@ -1948,14 +1953,27 @@ footer a {
 
 .inzenden .header_tekst {
   height: 41rem;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vw;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  z-index: 3;
 }
 
-.inzenden button {
+.inzenden .header_tekst input {
+  display: none;
+}
+
+.inzenden button, .inzenden label {
   background-color: #4A4A4A;
   color: white;
   text-transform: none;
   font-weight: 400;
   padding: 0rem 2rem;
+  cursor: pointer;
 }
 
 .inzenden form {

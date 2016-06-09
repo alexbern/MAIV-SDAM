@@ -8,3 +8,4 @@ export Overview from './Overview';
 export Project from './Project';
 export Room from './Room';
 export Review from './Review';
+export Submit from './Submit';

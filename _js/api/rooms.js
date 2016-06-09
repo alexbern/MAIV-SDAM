@@ -1,6 +1,6 @@
 'use strict';
 import fetch from 'isomorphic-fetch';
-import {buildBody, checkStatus} from '../util';
+import {checkStatus} from '../util';
 import {basename} from '../globals/';
 
 let base = `${basename}/api/rooms`;
@@ -15,6 +15,11 @@ export const searchRooms = (search) => {
     .then(checkStatus);
 };
 
+export const searchAllRooms = (search) => {
+  return fetch(`${base}/all?q=${search}`)
+    .then(checkStatus);
+};
+
 export const getRoomById = (id) => {
   return fetch(`${base}/${id}`)
     .then(checkStatus);
@@ -23,5 +28,6 @@ export const getRoomById = (id) => {
 export default {
   getRooms,
   searchRooms,
-  getRoomById
+  getRoomById,
+  searchAllRooms
 };

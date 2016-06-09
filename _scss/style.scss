@@ -286,7 +286,7 @@ main{
 	.container{
 		display:flex;
 		flex-direction:row;
-		height:34rem;
+		// height:34rem;
 	}
 }
 
@@ -295,9 +295,10 @@ main{
 		margin-right:4rem;
 	}
 	.resultaat{
-		// min-width:33%;
+		min-width:33%;
 		max-width:33%;
-		// width: 33%;
+		margin-bottom: 5rem;
+		margin-top: 5rem;
 		.item_beschrijving{
 			min-height:12rem;
 		}
@@ -371,7 +372,7 @@ main{
 		display:flex;
 		flex-direction:column;
 		justify-content:flex-end;
-
+		margin-top: 3rem;
 		.top{
 			display:flex;
 		}
@@ -696,6 +697,7 @@ footer{
 		background-color:white;
 		display:flex;
 		justify-content:space-between;
+		z-index: 3;
 		//box-shadow:0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 		box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
 
@@ -1408,6 +1410,7 @@ footer{
 	.heart{
 		min-height:4rem;
 		min-width:4rem;
+		width: 2rem;
 		background-color:$pink;
 		display:flex;
 		justify-content:center;
@@ -1521,14 +1524,23 @@ footer{
 	}
 	.header_tekst{
 		height:41rem;
+		display: flex;
+		width: 100vw;
+		justify-content: center;
+		align-items: center;
+		z-index: 3;
+		input{
+			display: none;
+		}
 	}
 
-	button{
+	button, label{
 		background-color:$darkgrey;
 		color:white;
 		text-transform:none;
 		font-weight:400;
 		padding:0rem 2rem;
+		cursor: pointer;
 	}
 	form{
 		margin-top:-3rem;

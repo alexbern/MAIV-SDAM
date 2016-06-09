@@ -33,7 +33,7 @@ export default class Room extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <body className="kamer_detail">
+      <div className="kamer_detail">
         <header>
           <div className="navigatie not_sticky">
             <div className="container">
@@ -221,7 +221,7 @@ export default class Room extends React.Component {
               <ul className="reviews">
                 <li className="review">
                   <div className="left">
-                    <img className="persoon_image" src={`#`} />
+                    <img className="persoon_image" src={`${basename}/assets/img/meisje.png`} />
                     <p>Nicola</p>
                   </div>
                   <p className="right">
@@ -230,7 +230,7 @@ export default class Room extends React.Component {
                 </li>
                 <li className="review">
                   <div className="left">
-                    <img className="persoon_image" src={`#`} />
+                    <img className="persoon_image" src={`${basename}/assets/img/meisje.png`} />
                     <p>Nicola</p>
                   </div>
                   <p className="right">
@@ -239,7 +239,7 @@ export default class Room extends React.Component {
                 </li>
                 <li className="review">
                   <div className="left">
-                    <img className="persoon_image" src={`#`} />
+                    <img className="persoon_image" src={`${basename}/assets/img/meisje.png`} />
                     <p>Nicola</p>
                   </div>
                   <p className="right">
@@ -394,7 +394,7 @@ export default class Room extends React.Component {
             </div>
           </div>
         </footer>
-      </body>
+      </div>
     );
   }
 }

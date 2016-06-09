@@ -1,16 +1,15 @@
 'use strict';
 
 import React from 'react';
-import {basename} from '../globals';
 import {Link} from 'react-router';
+import {basename} from '../globals/';
 
-export default class Listitem extends React.Component {
+export default class Room extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {
     };
-    console.log(this.props);
   }
 
   componentDidMount(){
@@ -21,25 +20,22 @@ export default class Listitem extends React.Component {
   }
 
   render() {
-    let {name, id, description} = this.props;
+    let {name, description, id} = this.props;
     return (
-
         <div className="resultaat">
           <Link to={`/room/${id}`}>
             <div className="top" ref='backgroundimg'>
-              {/*<img src={`${basename}/assets/img/${image}`}/>*/}
             </div>
             <div className="bottom">
               <p className="item_title">{name}</p>
               <p className="item_beschrijving">{description}</p>
-              <div className="cta">
+              <div className="cta meer">
                 <a href="#">Toon me meer</a>
                 <img src={`${basename}/assets/img/arrow.svg`} />
               </div>
             </div>
           </Link>
         </div>
-
     );
   }
 }
