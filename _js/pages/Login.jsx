@@ -27,6 +27,9 @@ export default class Login extends React.Component {
         .then(t=>token.set(t))
         .then(()=> {
           this.context.router.push('/home');
+        })
+        .catch((errors)=>{
+          this.setState({error: errors.error, password: '', email: ''});
         });
     }else{
       this.setState({error, password: '', email: ''});
@@ -51,7 +54,8 @@ export default class Login extends React.Component {
   }
 
   render() {
-    // let {error} = this.state;
+    let {error} = this.state;
+    console.log(this.state);
     return (
         <main className='aanmelden'>
           <div className="navigatie">
@@ -70,6 +74,7 @@ export default class Login extends React.Component {
                 <label for="password">wachtwoord</label>
                 <input type="password" id="password" placeholder="Wat is je wachtwoord?" onChange={()=>this.changeHandler()} ref='password'/>
               </div>
+              {error}
               <input type="submit" value="Inloggen" />
             </form>
           </div>

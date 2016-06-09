@@ -45,7 +45,7 @@ $app->post('/api/auth', function($request, $response, $args){
 
   }
 
-  $data = array('error' => 'invalid email / password combination');
+  $data = array('error' => 'Ongeldig email of paswoord');
 
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json')->withStatus(400);

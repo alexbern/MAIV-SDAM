@@ -112,7 +112,11 @@ export default class Project extends React.Component {
     let {id} = this.props.params;
     getProjectById(id)
       .then(project => {
-        this.setState({project: project['0']});
+        if (isEmpty(project)){
+          this.context.router.push('/projects');
+        }else{
+          this.setState({project: project['0']});
+        }
       })
       .then(()=>{
         if (isEmpty(this.state.project)) {

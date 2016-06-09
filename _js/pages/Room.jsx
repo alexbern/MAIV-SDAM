@@ -1,9 +1,10 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import {getRoomById} from '../api/rooms';
+import {getRoomById, getRandomRooms} from '../api/rooms';
 import {isEmpty} from 'lodash';
 import {basename} from '../globals/';
+import {Navigation, Stickynav, Footer, Result} from '../components';
 
 export default class Room extends React.Component {
 
@@ -27,7 +28,21 @@ export default class Room extends React.Component {
         if (isEmpty(this.state.project.room)) {
           this.context.router.push('/home');
         }
+      })
+      .then(getRandomRooms)
+      .then(rooms=>{
+        this.setState({randoms: rooms});
       });
+  }
+
+  renderResults(){
+    console.log('render result');
+    let {randoms} = this.state;
+    if (randoms) {
+      return randoms.rooms.map((room, i)=>{
+        return <Result {...room} key={i}/>;
+      });
+    }
   }
 
   render() {
@@ -35,34 +50,12 @@ export default class Room extends React.Component {
     return (
       <div className="kamer_detail">
         <header>
-          <div className="navigatie not_sticky">
-            <div className="container">
-              <a href="index.html" className="logo">hoogtel</a>
-              <nav>
-                <ul>
-                  <li><a href="verblijven.html">onze kamers</a></li>
-                  <li><a href="projecten.html">ingezonden projecten</a></li>
-                  {/*<!--<li><a href="over.html">over hoogtel</a></li>-->*/}
-                </ul>
-              </nav>
-              <div className="boek_btn">
-                <a href="#">boeken</a>
-              </div>
-            </div>
-          </div>
+          <Navigation />
           <div className="header_background">
             <img src={`${basename}/assets/img/jenever_1.jpg`} />
           </div>
         </header>
-        <div className="navigatie sticky">
-          <div className="container">
-            <a href="index.html" className="logo">hoogtel</a>
-            <div className="boek_btn">
-              <a href="#">boeken</a>
-              <a href="#" className="blue_bg">menu</a>
-            </div>
-          </div>
-        </div>
+        <Stickynav />
         <main>
           <section className="info">
             <div className="left">
@@ -264,97 +257,7 @@ export default class Room extends React.Component {
             <div className="container">
               <div className="scroller">
                 <div className="lijst">
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="resultaat">
-                    <div className="top">
-                      <img src={`#`} />
-                    </div>
-                    <div className="bottom">
-                      <p className="item_title">Klassieke woning</p>
-                      <p>I gotta say at that time I’d like to meet Kanye That dreams will actualize. Dreams will manifest.</p>
-                      <div className="cta">
-                        <a href="#">Toon me meer</a>
-                        <img src={`#`} />
-                      </div>
-                    </div>
-                  </div>
+                  {this.renderResults()}
                 </div>
               </div>
               <div className="background-tekst">
@@ -366,34 +269,7 @@ export default class Room extends React.Component {
             </div>
           </section>
         </main>
-        <footer>
-          <div className="container">
-            <div className="contact">
-              <p className="footer_title">CONTACT</p>
-              <ul>
-                <li><a href="mailto:hallo@jonasleupe.be">hallo@jonasleupe.be</a></li>
-                <li><a href="tel:0032495195774">+32 495 19 57 74</a></li>
-              </ul>
-            </div>
-            <div className="adres">
-              <p className="footer_title">adres</p>
-              <a href="#">Hoogstraat 1<br/>3111 Schiedam, Nederland</a>
-            </div>
-            <div className="nieuwsbrief">
-              <p className="footer_title">nieuwsbrief</p>
-              <input type="text" placeholder="Naam" required />
-              <input type="email" placeholder="E-mail adres" required />
-              <button type="submit">inschrijven</button>
-            </div>
-            <div className="social">
-              <p className="footer_title">sociaal</p>
-              <ul>
-                <li><a href="http://www.facebook.com/">Facebook</a></li>
-                <li><a href="http://www.instagram.com/">Instagram</a></li>
-              </ul>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     );
   }

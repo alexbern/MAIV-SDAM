@@ -29,6 +29,15 @@ $app->get($base, function($request, $response, $args){
 
 });
 
+$app->get($base . '/random', function($request, $response, $args){
+  $roomDAO = new RoomDAO();
+  $data = array();
+  $data['rooms'] = $roomDAO->selectRandomRooms();
+
+  $response->getBody()->write(json_encode($data));
+  return $response->withHeader('Content-Type','application/json');
+});
+
 $app->get($base . '/all', function($request, $response, $args){
 
   $query = $request->getQueryParams();

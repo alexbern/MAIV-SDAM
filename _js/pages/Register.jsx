@@ -19,7 +19,8 @@ export default class Register extends React.Component {
       name: '',
       password: '',
       phone: '',
-      image: ''
+      image: '',
+      errors: ''
     };
   }
 
@@ -48,20 +49,19 @@ export default class Register extends React.Component {
         .then(t=>token.set(t))
         .then(()=> {
           this.context.router.push('/home');
+        })
+        .catch((error)=>{
+          this.setState({errors: {email: error.error}, password: ''});
         });
-      console.log(this.state);
+
     }else{
       this.setState({errors, password: ''});
     }
   }
 
   validate(){
-    let {email, password, name, phone, image} = this.state;
+    let {email, password, name, phone} = this.state;
     let errors = {};
-
-    if(!image){
-      errors.image = 'Geen image meegegeven';
-    }
 
     if(!email){
       errors.email = 'Ongeldig email adress';
@@ -83,7 +83,8 @@ export default class Register extends React.Component {
   }
 
   render() {
-    let {name, password, email, phone} = this.state;
+    console.log(this.state);
+    let {name, password, email, phone, errors} = this.state;
     return (
         <main className='registreren'>
           <div className="navigatie">
@@ -102,18 +103,22 @@ export default class Register extends React.Component {
               <div className="form_item">
                 <label for="naam">naam</label>
                 <input type="text" id="naam" placeholder="Wat is je naam?" ref="name" onChange={()=>this.changeHandler()} value={name} />
+              {errors.name}
               </div>
               <div className="form_item">
                 <label for="telefoon">telefoon</label>
                 <input type="tel" id="telefoon" placeholder="+32 012 45 67 89" ref="phone" onChange={()=>this.changeHandler()} value={phone}/>
+              {errors.phone}
               </div>
               <div className="form_item">
                 <label for="email">email</label>
                 <input type="email" id="email" name='email' placeholder="Wat is je e-mail adres?" ref="email" onChange={()=>this.changeHandler()} value={email}/>
+              {errors.email}
               </div>
               <div className="form_item">
                 <label for="password">wachtwoord</label>
                 <input type="password" id="password" placeholder="Wat is je wachtwoord?" ref="password" onChange={()=>this.changeHandler()} value={password}/>
+              {errors.password}
               </div>
               <input type="submit" value="registreren" />
             </form>

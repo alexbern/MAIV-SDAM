@@ -25,9 +25,15 @@ export const getRoomById = (id) => {
     .then(checkStatus);
 };
 
+export const getRandomRooms = () => {
+  return fetch(`${base}/random`)
+    .then(checkStatus);
+};
+
 export default {
   getRooms,
   searchRooms,
   getRoomById,
-  searchAllRooms
+  searchAllRooms,
+  getRandomRooms
 };
