@@ -27,7 +27,6 @@ export default class Register extends React.Component {
 
   onFileChangeHandler(e){
     this.setState({image: e.currentTarget.files[0]});
-    console.log(e.currentTarget.files[0]);
   }
 
   changeHandler(){
@@ -42,7 +41,6 @@ export default class Register extends React.Component {
 
   submitHandler(e){
     e.preventDefault();
-    console.log(this.state);
     let errors = this.validate();
     if (isEmpty(errors)) {
       insert(this.state)
@@ -84,7 +82,6 @@ export default class Register extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     let {name, password, email, phone, errors} = this.state;
     return (
         <main className='registreren'>
@@ -123,6 +120,7 @@ export default class Register extends React.Component {
               </div>
               <input type="submit" value="registreren" />
             </form>
+            <Link className="cta" to="/login">Of heb je al een account?</Link>
           </div>
           <div className="afbeelding">
             <img className="lachende_man" src="assets/img/lachende_man.png" />

@@ -144,6 +144,75 @@ p {
   color: #19D2FF !important;
 }
 
+.ham_menu {
+  padding: 0rem !important;
+  height: 4rem !important;
+  width: 4rem !important;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.ham_menu img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.hide {
+  display: none !important;
+}
+
+.overlay_menu {
+  width: 100vw;
+  height: 93vh;
+  background-color: #FC0E5F;
+  position: fixed;
+  z-index: 999;
+  top: 0rem;
+  left: 0rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.overlay_menu nav {
+  width: 90vw;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.overlay_menu ul {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.overlay_menu li {
+  font-size: 4em;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.overlay_menu a {
+  color: white;
+}
+
 .blue_bg {
   background-color: #19D2FF !important;
 }
@@ -429,6 +498,29 @@ main .container {
   display: flex;
   -ms-flex-direction: row;
       flex-direction: row;
+  transition: all 1s ease-out;
+  overflow: scroll;
+  height: 40rem;
+  max-width: 96rem;
+}
+
+.empty_result {
+  max-height: 0rem;
+}
+
+.not_empty_result {
+  animation-name: vergroten;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes vergroten {
+  from {
+    height: 0rem;
+  }
+  to {
+    height: 34rem;
+  }
 }
 
 .homepage .resultaat:last-child {
@@ -436,10 +528,11 @@ main .container {
 }
 
 .homepage .resultaat {
-  min-width: 33%;
-  max-width: 33%;
+  min-width: 28%;
+  max-width: 28%;
   margin-bottom: 5rem;
   margin-top: 5rem;
+  margin-right: 3%;
 }
 
 .homepage .resultaat .item_beschrijving {
@@ -519,7 +612,7 @@ main .container {
 }
 
 .verblijf {
-  margin-top: 6rem;
+  margin-top: 2rem;
   margin-bottom: 5rem;
   height: 60.8rem;
   width: 102.4rem;
@@ -844,6 +937,7 @@ footer a {
 .nieuwsbrief input[type="text"], .nieuwsbrief input[type="email"] {
   background-color: transparent;
   padding-bottom: 0.5rem;
+  border: none;
   border-bottom: 1px solid white;
   font-size: 1.4em;
   color: white;
@@ -874,6 +968,7 @@ footer a {
   display: block;
   padding-left: 0rem;
   padding-bottom: 1rem;
+  border: none;
   border-bottom: 2px solid white;
   text-transform: uppercase;
   background-color: transparent;
@@ -881,6 +976,12 @@ footer a {
   width: 8.5rem !important;
   letter-spacing: 0.1rem;
   text-align: left;
+  transition: all 0.4s ease;
+}
+
+.nieuwsbrief button[type="submit"]:hover {
+  letter-spacing: 0.15rem;
+  width: 9rem !important;
 }
 
 .footer_title {
@@ -1725,10 +1826,12 @@ footer a {
 
 .projecten .resultaten, .verblijven .resultaten {
   margin-top: 3rem;
+  min-height: auto;
+  overflow: hidden;
 }
 
 .projecten .resultaten .container, .verblijven .resultaten .container {
-  height: auto;
+  height: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -1873,7 +1976,7 @@ footer a {
 }
 
 .projecten .resultaat:last-child, .verblijven .resultaat:last-child {
-  width: 100% !important;
+  min-width: 100% !important;
   -ms-flex-direction: row;
       flex-direction: row;
   max-height: 20rem;
@@ -1886,11 +1989,20 @@ footer a {
   min-width: 22.5rem;
   width: 22.5rem;
   margin-right: 2rem;
+  position: static !important;
+  position: initial !important;
+  top: auto !important;
+  top: initial !important;
+  left: auto !important;
+  left: initial !important;
+  padding-left: 0rem !important;
+  padding-top: 0rem !important;
 }
 
 .projecten .resultaat:last-child .bottom, .verblijven .resultaat:last-child .bottom {
   margin-top: 0rem;
   width: 100%;
+  max-height: 100%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -1900,22 +2012,38 @@ footer a {
   padding-bottom: 2rem;
   padding-top: 2rem;
   padding-right: 2rem;
+  position: static !important;
+  position: initial !important;
+  top: auto !important;
+  top: initial !important;
+  left: auto !important;
+  left: initial !important;
+  padding-left: 2rem !important;
 }
 
 .projecten .resultaat:last-child .item_title, .verblijven .resultaat:last-child .item_title {
   padding-left: 0rem;
   padding-top: 0rem;
   padding-bottom: 0rem;
+  width: 100% !important;
 }
 
 .projecten .resultaat:last-child .item_beschrijving, .verblijven .resultaat:last-child .item_beschrijving {
   font-size: 2.5em;
   padding-top: 0rem;
   padding-left: 0rem;
+  max-height: 12rem;
+  min-height: 4rem;
+  width: 100% !important;
 }
 
 .projecten .resultaat:last-child .meer, .verblijven .resultaat:last-child .meer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
   width: 15rem;
+  min-height: 4rem;
   padding: 0rem 1rem;
   background-color: #FC0E5F;
   margin-right: 2rem;
@@ -1925,6 +2053,14 @@ footer a {
   border: none;
   -ms-flex-pack: start;
       justify-content: flex-start;
+  margin-bottom: 0rem !important;
+}
+
+.projecten .resultaat:last-child .resultaat_link, .verblijven .resultaat:last-child .resultaat_link {
+  height: 100%;
+  min-width: 100%;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .projecten .resultaat:last-child a, .verblijven .resultaat:last-child a {
@@ -1947,13 +2083,17 @@ footer a {
   padding-right: 10rem;
 }
 
+.inzenden {
+  position: relative;
+}
+
 .inzenden header {
-  height: 50rem;
-  background-color: #D8D8D8;
+  height: auto;
+  min-height: 40rem;
 }
 
 .inzenden .header_tekst {
-  height: 41rem;
+  min-height: 100%;
   display: -ms-flexbox;
   display: flex;
   width: 100vw;
@@ -1962,10 +2102,21 @@ footer a {
   -ms-flex-align: center;
       align-items: center;
   z-index: 3;
+  background-color: #D8D8D8;
 }
 
 .inzenden .header_tekst input {
   display: none;
+}
+
+.inzenden .submit_header {
+  position: relative;
+}
+
+.inzenden .submit_main {
+  position: relative;
+  top: 0rem;
+  margin-top: -5rem;
 }
 
 .inzenden button, .inzenden label {
@@ -1977,13 +2128,15 @@ footer a {
   cursor: pointer;
 }
 
+.inzenden .submit_main_container {
+  position: relative;
+  margin-bottom: 5rem;
+}
+
 .inzenden form {
-  margin-top: -3rem;
   margin-bottom: 10rem;
-  padding: 3rem;
   width: 96rem;
   background-color: white;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -1993,12 +2146,17 @@ footer a {
 }
 
 .inzenden .form_container {
+  padding: 3rem;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
   -ms-flex-pack: justify;
       justify-content: space-between;
   margin-bottom: 2rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+  background-color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .inzenden .form_item {
@@ -2049,17 +2207,17 @@ footer a {
       justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-}
-
-.inzenden .right .form_item:first-child {
-  min-width: 100%;
-  height: 28rem;
+  /*.form_item:first-child{
+			min-width:100%;
+			height:28rem;
+		}*/
 }
 
 .inzenden .right .form_item {
   max-width: 19.7rem;
-  width: 48%;
-  height: 13.4rem;
+  min-width: 100%;
+  min-height: 13.4rem;
+  height: 20%;
   background-color: #D8D8D8;
   display: -ms-flexbox;
   display: flex;
@@ -2091,17 +2249,28 @@ footer a {
 }
 
 .inzenden input[type="submit"] {
-  width: 40rem;
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
   height: 4rem;
   font-size: 1.4em;
   background-color: #FFE900;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
   margin-bottom: -4.5rem;
   transition: all 0.4s ease;
+  position: absolute;
+  margin-top: -4rem;
+  z-index: 2;
+  border: none;
 }
 
 .inzenden input[type="submit"]:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+
+.inzenden footer {
+  position: relative;
+  z-index: 3;
 }
 
 textarea {
@@ -2125,8 +2294,22 @@ form label {
 }
 
 .aanmelden, .registreren, .reviewpage {
+  overflow: hidden;
+  height: 100vh;
   background-color: #FC0E5F;
   overflow: hidden;
+}
+
+.aanmelden .cta, .registreren .cta, .reviewpage .cta {
+  font-size: 1.4em;
+  font-weight: 400;
+  padding-bottom: 0.5rem;
+  transition: all 0.4s ease;
+}
+
+.aanmelden .cta:hover, .registreren .cta:hover, .reviewpage .cta:hover {
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
 }
 
 .aanmelden header, .registreren header, .reviewpage header {
@@ -2173,6 +2356,7 @@ form label {
   -ms-flex-pack: center;
       justify-content: center;
   z-index: 3;
+  top: 0rem;
 }
 
 .aanmelden .afbeelding, .registreren .afbeelding, .reviewpage .afbeelding {
@@ -2180,6 +2364,8 @@ form label {
   height: 100vh;
   position: absolute;
   z-index: 2;
+  top: 0rem;
+  overflow: hidden;
 }
 
 .aanmelden .lachende_man, .registreren .lachende_man, .reviewpage .lachende_man {
@@ -2240,9 +2426,15 @@ form label {
 
 .aanmelden input[type="email"], .aanmelden input[type="password"], .aanmelden input[type="text"], .aanmelden input[type="tel"], .registreren input[type="email"], .registreren input[type="password"], .registreren input[type="text"], .registreren input[type="tel"], .reviewpage input[type="email"], .reviewpage input[type="password"], .reviewpage input[type="text"], .reviewpage input[type="tel"] {
   width: 100%;
+  border: none;
   border-bottom: 2px solid #FFE900;
   padding-bottom: 1rem;
   font-size: 1.4em;
+  transition: all 0.4s ease;
+}
+
+.aanmelden input[type="email"]:focus, .aanmelden input[type="password"]:focus, .aanmelden input[type="text"]:focus, .aanmelden input[type="tel"]:focus, .registreren input[type="email"]:focus, .registreren input[type="password"]:focus, .registreren input[type="text"]:focus, .registreren input[type="tel"]:focus, .reviewpage input[type="email"]:focus, .reviewpage input[type="password"]:focus, .reviewpage input[type="text"]:focus, .reviewpage input[type="tel"]:focus {
+  border-bottom: 2px solid #19D2FF;
 }
 
 .aanmelden input[type="submit"], .registreren input[type="submit"], .reviewpage input[type="submit"] {
@@ -2250,6 +2442,13 @@ form label {
   background-color: #FFE900;
   font-size: 1.4em;
   height: 4rem;
+  border: none;
+  transition: all 0.4s ease;
+}
+
+.aanmelden input[type="submit"]:focus, .aanmelden input[type="submit"]:hover, .registreren input[type="submit"]:focus, .registreren input[type="submit"]:hover, .reviewpage input[type="submit"]:focus, .reviewpage input[type="submit"]:hover {
+  letter-spacing: 0.1rem;
+  background-color: #19D2FF;
 }
 
 .reviewpage {
@@ -2259,6 +2458,24 @@ form label {
 .sticky {
   overflow: hidden;
   width: 100vw;
+  margin-top: 0rem;
+}
+
+.sticky .boek_btn {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.sticky .boek_btn a {
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 4rem;
+  -ms-flex-align: center;
+      align-items: center;
 }
 
 .registreren form {
@@ -2729,6 +2946,10 @@ form label {
     font-size: 10em;
     margin-bottom: 2rem;
   }
+  .verblijf .left img {
+    height: 100%;
+    width: auto;
+  }
 }
 
 @media (max-width: 900px) {
@@ -3008,7 +3229,7 @@ form label {
     display: -ms-flexbox;
     display: flex;
     position: fixed;
-    height: 6rem;
+    height: 7vh;
     bottom: 0rem;
     background-color: #FFE900;
   }
@@ -3127,14 +3348,20 @@ form label {
     width: 100%;
     height: 100%;
   }
-  .verblijf .right img {
-    min-width: 30rem;
+  .verblijf .right .image {
+    min-width: 34rem;
   }
-  .verblijf .right img:first-child {
+  .verblijf .right .image:first-child {
     margin-left: 3rem;
   }
-  .verblijf .right img:last-child {
+  .verblijf .right .image:last-child {
     margin-right: 3rem;
+  }
+  .verblijf .right img {
+    margin: 0rem;
+  }
+  .verblijf .right img {
+    min-width: 30rem;
   }
   .tussen_tekst p {
     -webkit-columns: auto;
@@ -3425,9 +3652,6 @@ form label {
   }
   .registreren .form_item:nth-child(3), .registreren .form_item:nth-child(5) {
     margin-bottom: 2rem;
-  }
-  .inzenden input[type="submit"] {
-    width: 80vw;
   }
 }
 

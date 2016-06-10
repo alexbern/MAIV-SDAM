@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react';
 import {getProjectById} from '../api/projects';
 import {isEmpty} from 'lodash';
-import {Navigation, Stickynav, Footer} from '../components';
+import {Navigation, Stickynav, Footer, Overlay} from '../components';
 import {addVote, checkVote, deleteVote, countVotes} from '../api/votes';
 import {size} from 'lodash';
 import token from '../auth/token';
@@ -83,7 +83,6 @@ export default class Project extends React.Component {
   renderPreviousProject(){
     let {previousProject} = this.state;
     if (!isEmpty(previousProject)) {
-      console.log(previousProject);
       let {id, name, img1, owner_id} = previousProject['0'];
       return (
         <div className="previous_project project">
@@ -181,6 +180,7 @@ export default class Project extends React.Component {
         <header className='project-header-backimg'>
           <Navigation />
         </header>
+        <Overlay/>
         <Stickynav />
         <main>
           <section className="inleiding">

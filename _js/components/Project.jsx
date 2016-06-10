@@ -46,7 +46,7 @@ export default class Project extends React.Component {
     let {shortdesc, name, id} = this.props;
     return (
       <div className="resultaat">
-        <Link to={`/project/${id}`}>
+        <Link className="resultaat_link" to={`/project/${id}`}>
           <div className="top" ref='backgroundimg'>
           </div>
           <div className="bottom">

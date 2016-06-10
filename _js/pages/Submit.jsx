@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import {Navigation, Stickynav, Footer} from '../components';
+import {Navigation, Stickynav, Footer, Overlay} from '../components';
 import token from '../auth/token';
 import {isEmpty} from 'lodash';
 import {insert} from '../api/projects';
@@ -130,20 +130,16 @@ export default class Submit extends React.Component {
     return (
       <form className="inzenden" onSubmit={(e)=>this.submitHandler(e)}>
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
-        <header>
+        <header className="submit_header">
           <Navigation />
           <div className="header_tekst">
             <label className="btn btn_fill btn1">Voeg een omslagfoto toe<input type='file' name='img1' accept="image/*" ref="file" onChange={(e)=>this.onFileChangeHandlerOne(e)}/></label>
           </div>
         </header>
+        <Overlay/>
         <Stickynav />
-        <main>
-
-        {/*VOOR JONAS
-        de eerste div die hier onder staat was vroeger een form (hadig om te weten voor styling)*/}
-
-
-          <div>
+        <main className="submit_main">
+          <div className="submit_main_container">
             <div className="form_container">
               <div className="left">
                 <div className="form_item">

@@ -2,7 +2,7 @@
 
 import React, {PropTypes} from 'react';
 import {getRooms, searchAllRooms} from '../api/rooms';
-import {Navigation, Stickynav, Footer, Room} from '../components';
+import {Navigation, Stickynav, Footer, Room, Overlay} from '../components';
 import {basename} from '../globals/';
 
 export default class Rooms extends React.Component {
@@ -50,7 +50,6 @@ export default class Rooms extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="verblijven">
         <header>
@@ -67,9 +66,9 @@ export default class Rooms extends React.Component {
             </div>
           </div>
           <div className="header_background">
-            {/*<img src="#" />*/}
           </div>
         </header>
+        <Overlay/>
         <Stickynav />
         <main>
           <form className="search" onSubmit={(e)=>this.submitHandler(e)}>

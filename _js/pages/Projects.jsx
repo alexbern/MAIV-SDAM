@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react';
 import {getProjects, searchProjects} from '../api/projects';
 import {addVote, checkVote, deleteVote} from '../api/votes';
-import {Navigation, Stickynav, Footer, Project} from '../components';
+import {Navigation, Stickynav, Footer, Project, Overlay} from '../components';
 import {isEmpty} from 'lodash';
 import Emitter from '../events/';
 import token from '../auth/token';
@@ -97,6 +97,7 @@ export default class Projects extends React.Component {
             {/*<img src="#" />*/}
           </div>
         </header>
+        <Overlay/>
         <Stickynav />
         <main>
           <form className="search" onSubmit={(e)=>this.submitHandler(e)}>

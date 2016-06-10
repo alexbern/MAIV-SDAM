@@ -23,14 +23,14 @@ export default class Room extends React.Component {
     let {name, description, id} = this.props;
     return (
         <div className="resultaat">
-          <Link to={`/room/${id}`}>
+          <Link className="resultaat_link" to={`/room/${id}`}>
             <div className="top" ref='backgroundimg'>
             </div>
             <div className="bottom">
               <p className="item_title">{name}</p>
               <p className="item_beschrijving">{description}</p>
               <div className="cta meer">
-                <a href="#">Toon me meer</a>
+                <Link to=''>Toon me meer</Link>
                 <img src={`${basename}/assets/img/arrow.svg`} />
               </div>
             </div>

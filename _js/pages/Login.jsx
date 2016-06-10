@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react';
 import {isEmpty} from 'lodash';
 import {login} from '../api/auth';
+import {Link} from 'react-router';
 import token from '../auth/token';
 
 export default class Login extends React.Component {
@@ -55,12 +56,11 @@ export default class Login extends React.Component {
 
   render() {
     let {error} = this.state;
-    console.log(this.state);
     return (
         <main className='aanmelden'>
           <div className="navigatie">
             <div className="container">
-              <a href="index.html" className="logo">hoogtel</a>
+              <Link to="/home" className="logo">hoogtel</Link>
             </div>
           </div>
           <div className="formulier">
@@ -77,6 +77,7 @@ export default class Login extends React.Component {
               {error}
               <input type="submit" value="Inloggen" />
             </form>
+            <Link className="cta" to="/register">Nog geen account?</Link>
           </div>
           <div className="afbeelding">
             <img className="lachende_vrouw" src="assets/img/lachende_vrouw.png" />

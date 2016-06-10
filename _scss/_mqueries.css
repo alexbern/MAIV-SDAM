@@ -17,7 +17,7 @@
 @media (max-width: 1250px){
  .header_background{
     width:75vw;
-  } 
+  }
 }
 @media (max-width: 1210px){
   .header_images{
@@ -78,12 +78,12 @@
   }
   .header_images{
     .container{
-      width:80%;  
+      width:80%;
     }
     .header_images_container{
       width:90vw;
     }
-    
+
     .meisje{
       width:auto;
       height:80%;
@@ -117,7 +117,7 @@
     .header_images{
       .text_container{
         height:60%;
-      }  
+      }
     }
   }
   .header_background{
@@ -278,7 +278,7 @@
       left:40vw;
       top:0rem;
     }
-    
+
     /*
     .text_container, .images_container{
       max-width:100%;
@@ -295,7 +295,7 @@
       height:70%;
     }
   }
- 
+
 }
 @media (max-width: 960px){
   .header_images{
@@ -354,7 +354,7 @@
   }
   .kamer_detail{
     .info{
-      width:90vw;  
+      width:90vw;
       .left{
         width:35%;
       }
@@ -467,6 +467,14 @@
       h1{
         font-size:10em;
         margin-bottom:2rem;
+      }
+    }
+  }
+  .verblijf{
+    .left{
+      img{
+        height:100%;
+        width:auto;
       }
     }
   }
@@ -638,7 +646,7 @@
       //min-width:48.5%;
       //max-width:48.5%;
       width:48.5%;
-      
+
     }
     .resultaat:nth-child(11n+7){
       min-width:100% !important;
@@ -712,7 +720,7 @@
       margin-right:0rem;
     }
   }
-  
+
 }
 @media (min-width: 741px){
   .sticky{
@@ -740,7 +748,7 @@
   .sticky{
     display:flex;
     position:fixed;
-    height:6rem;
+    height:7vh;
     bottom:0rem;
     background-color:$yellow;
   }
@@ -882,14 +890,20 @@
     .right{
       width:100%;
       height:100%;
-      img{
-        min-width:30rem;
+      .image{
+        min-width:34rem;
       }
-      img:first-child{
+      .image:first-child{
         margin-left:3rem;
       }
-      img:last-child{
+      .image:last-child{
         margin-right:3rem;
+      }
+      img{
+        margin:0rem;
+      }
+      img{
+        min-width:30rem;
       }
     }
 
@@ -977,7 +991,7 @@
         margin-bottom:4rem;
       }
       .cta{
-        display:flex; 
+        display:flex;
       }
     }
   }
@@ -996,7 +1010,7 @@
       align-items::center;
       display:flex;
       flex-direction:column;
-      
+
     }
     h2{
       font-size:8em;
@@ -1090,7 +1104,7 @@
       li{
         width:100%;
         margin-bottom:1rem;
-      }  
+      }
     }
   }
   .project_detail{
@@ -1156,7 +1170,7 @@
     height:auto;
     flex-direction:row;
     width:90vw;
-    
+
     input[type="submit"]{
       min-width:100%;
       height:4rem;
@@ -1194,7 +1208,7 @@
       .form_item{
         width:100%;
         max-width:100%;
-      } 
+      }
     }
   }
 }
@@ -1221,9 +1235,7 @@
     }
   }
   .inzenden{
-    input[type="submit"]{
-      width:80vw;
-    }
+
   }
 }
 

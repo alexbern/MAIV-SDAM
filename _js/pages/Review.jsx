@@ -57,7 +57,6 @@ export default class Review extends React.Component {
       insertReview(this.state)
         .then(this.context.router.push('/home'));
     }else{
-      console.error(error);
       return;
     }
   }
@@ -137,14 +136,6 @@ export default class Review extends React.Component {
         <fieldset className="login-fieldset">
           <textarea ref='review' onChange={()=>this.changeHandler()}>
           </textarea>
-          {/*<select onChange={()=>this.changeHandler()} ref='sfeer'>
-            <option value="">Kies iets</option>
-            <option value="1">Niet zo goed</option>
-            <option value="2">Redelijk Goed</option>
-            <option value="3">Goed</option>
-            <option value="4">Heel Goed</option>
-            <option value="5">Geweldig</option>
-          </select>*/}
           <ul>
             Sfeer:
             {this.renderStars('sfeer')}

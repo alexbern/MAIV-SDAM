@@ -10,7 +10,14 @@ export default class Listitem extends React.Component {
     super(props, context);
     this.state = {
     };
-    console.log(this.props);
+  }
+
+  renderDesc(){
+    let {description} = this.props;
+    if (description.length > 70) {
+      description = description.substring(0, 69) + "...";
+    }
+    return description;
   }
 
   componentDidMount(){
@@ -21,17 +28,16 @@ export default class Listitem extends React.Component {
   }
 
   render() {
-    let {name, id, description} = this.props;
+    let {name, id} = this.props;
     return (
 
         <div className="resultaat">
           <Link to={`/room/${id}`}>
             <div className="top" ref='backgroundimg'>
-              {/*<img src={`${basename}/assets/img/${image}`}/>*/}
             </div>
             <div className="bottom">
               <p className="item_title">{name}</p>
-              <p className="item_beschrijving">{description}</p>
+              <p className="item_beschrijving">{this.renderDesc()}</p>
               <div className="cta">
                 <a href="#">Toon me meer</a>
                 <img src={`${basename}/assets/img/arrow.svg`} />

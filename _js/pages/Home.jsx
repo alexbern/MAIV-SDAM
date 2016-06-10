@@ -2,10 +2,11 @@
 
 import React, {PropTypes} from 'react';
 
-import {Navigation, Listitem, Stickynav, Footer} from '../components';
+import {Navigation, Listitem, Stickynav, Footer, Overlay} from '../components';
 import {searchRooms} from '../api/rooms';
 import token from '../auth/token';
 import {basename} from '../globals/';
+import {Link} from 'react-router';
 
 export default class Home extends React.Component {
 
@@ -37,7 +38,12 @@ export default class Home extends React.Component {
       return;
     }else{
       searchRooms(search)
-        .then(rooms => this.setState({rooms: rooms}));
+        .then(rooms => this.setState({rooms: rooms}))
+        .then(()=>{
+          let selection = document.querySelector('.empty_result');
+          selection.classList.remove('empty_result');
+          selection.classList.add('no_emptry_result');
+        });
     }
   }
 
@@ -76,6 +82,7 @@ export default class Home extends React.Component {
           <div className="header_background">
           </div>
         </header>
+        <Overlay/>
         <Stickynav />
         <main>
           <form className="search" onSubmit={(e)=>this.submitHandler(e)} action='#'>
@@ -83,7 +90,7 @@ export default class Home extends React.Component {
             <input type="text" placeholder="Naar wat voor verblijf ben je op zoek?" autofocus onChange={()=>this.changeHandler()} ref="search"/>
             <input type="submit" value="zoeken" />
           </form>
-          <div className="resultaten">
+          <div className="resultaten empty_result">
             <div className="container">
               {this.renderResults()}
             </div>
@@ -140,8 +147,8 @@ export default class Home extends React.Component {
                 <p>Geïnspireerd op de oude Schiedamse Jeneverstokerijen, richtte David ons verblijf in met o.a. meubels gemaakt van oude jenevervaten en gerycleden jeneverflessen. Door dit alles in een nieuw jasje te steken creëerde hij een sfeervol verblijf met aandacht voor zowel ambacht als design.</p>
               </div>
               <div className="buttons">
-                <a href="#" className="btn btn_border">lees meer</a>
-                <a href="#" className="btn btn_fill">deelnemen</a>
+                <Link to='/home' className="btn btn_border">lees meer</Link>
+                <Link to='/submit' className="btn btn_fill">deelnemen</Link>
               </div>
             </div>
             <div className="ontwerp_background">

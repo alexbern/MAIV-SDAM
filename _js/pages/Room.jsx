@@ -4,7 +4,7 @@ import React, {PropTypes} from 'react';
 import {getRoomById, getRandomRooms} from '../api/rooms';
 import {isEmpty} from 'lodash';
 import {basename} from '../globals/';
-import {Navigation, Stickynav, Footer, Result} from '../components';
+import {Navigation, Stickynav, Footer, Result, Overlay} from '../components';
 
 export default class Room extends React.Component {
 
@@ -36,7 +36,6 @@ export default class Room extends React.Component {
   }
 
   renderResults(){
-    console.log('render result');
     let {randoms} = this.state;
     if (randoms) {
       return randoms.rooms.map((room, i)=>{
@@ -46,7 +45,6 @@ export default class Room extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="kamer_detail">
         <header>
@@ -55,6 +53,7 @@ export default class Room extends React.Component {
             <img src={`${basename}/assets/img/jenever_1.jpg`} />
           </div>
         </header>
+        <Overlay/>
         <Stickynav />
         <main>
           <section className="info">

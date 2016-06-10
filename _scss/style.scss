@@ -52,6 +52,55 @@ p{
 .blue{
 	color:$blue !important;
 }
+.ham_menu{
+  padding:0rem !important;
+  height:4rem !important;
+  width:4rem !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  img{
+    width:2rem;
+    height:2rem;
+  }
+}
+.hide{
+  display:none !important;
+}
+.overlay_menu{
+  width:100vw;
+  height:93vh;
+  background-color:$pink;
+  position:fixed;
+  z-index:999;
+  top:0rem;
+  left:0rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  nav{
+    width:90vw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  ul{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+  }
+  li{
+    font-size:4em;
+    font-weight:700;
+    margin-bottom:2rem;
+  }
+  a{
+    color:white;
+  }
+}
 .blue_bg{
 	background-color:$blue !important;
 }
@@ -286,8 +335,27 @@ main{
 	.container{
 		display:flex;
 		flex-direction:row;
-		// height:34rem;
+    transition:all 1s ease-out;
+    overflow:scroll;
+    height:40rem;
+    max-width:96rem;
 	}
+}
+
+
+.empty_result{
+  max-height:0rem;
+}
+
+.not_empty_result{
+  animation-name: vergroten;
+    animation-duration: 0.7s;
+    animation-fill-mode:forwards;
+}
+
+@keyframes vergroten {
+    from {height:0rem;}
+    to {height:34rem;}
 }
 
 .homepage{
@@ -295,10 +363,11 @@ main{
 		margin-right:4rem;
 	}
 	.resultaat{
-		min-width:33%;
-		max-width:33%;
+		min-width:28%;
+		max-width:28%;
 		margin-bottom: 5rem;
 		margin-top: 5rem;
+    margin-right:3%;
 		.item_beschrijving{
 			min-height:12rem;
 		}
@@ -359,7 +428,7 @@ main{
 	 box-shadow: 0 15px 24px rgba(0, 0, 0, 0.22), 0 19px 76px rgba(0, 0, 0, 0.3);
 }
 .verblijf{
-	margin-top:6rem;
+	margin-top:2rem;
 	margin-bottom:5rem;
 	height:60.8rem;
 	width:102.4rem;
@@ -636,6 +705,7 @@ footer{
 	input[type="text"], input[type="email"]{
 		background-color:rgba(0,0,0,0);
 		padding-bottom:0.5rem;
+    border:none;
 		border-bottom:1px solid white;
 		font-size:1.4em;
 		color:white;
@@ -660,6 +730,7 @@ footer{
 		display:block;
 		padding-left:0rem;
 		padding-bottom:1rem;
+    border:none;
 		border-bottom:2px solid white;
 		text-transform: uppercase;
 		background-color:rgba(0,0,0,0);
@@ -667,7 +738,13 @@ footer{
 		width:8.5rem !important;
 		letter-spacing: 0.1rem;
 		text-align: left;
+    transition:all 0.4s ease;
 	}
+  button[type="submit"]:hover{
+    letter-spacing: 0.15rem;
+    width:9rem !important;
+  }
+
 }
 .footer_title{
 	text-transform: uppercase;
@@ -1333,8 +1410,10 @@ footer{
 
 	.resultaten{
 		margin-top:3rem;
+    min-height:auto;
+    overflow:hidden;
 		.container{
-			height:auto;
+			height:100%;
 			flex-wrap:wrap;
 		}
 	}
@@ -1457,7 +1536,7 @@ footer{
 		margin-right:0rem;
 	}
 	.resultaat:last-child{
-		width:100% !important;
+		min-width:100% !important;
 		flex-direction:row;
 		max-height:20rem;
 		min-height:20rem;
@@ -1468,29 +1547,47 @@ footer{
 			min-width:22.5rem;
 			width:22.5rem;
 			margin-right:2rem;
+      position:initial !important;
+      top: initial !important;
+      left: initial !important;
+      padding-left:0rem !important;
+      padding-top:0rem !important;
 		}
 		.bottom{
 			margin-top:0rem;
 			width:100%;
+      max-height:100%;
 			display:flex;
 			flex-direction:column;
 			justify-content:space-between;
 			padding-bottom:2rem;
 			padding-top:2rem;
 			padding-right:2rem;
+      position:initial !important;
+      top:initial !important;
+      left:initial !important;
+      padding-left:2rem !important;
 		}
 		.item_title{
 			padding-left:0rem;
 			padding-top:0rem;
 			padding-bottom:0rem;
+      width:100% !important;
 		}
 		.item_beschrijving{
 			font-size:2.5em;
 			padding-top:0rem;
 			padding-left:0rem;
+      max-height:12rem;
+      min-height:4rem;
+      width:100% !important;
+
 		}
 		.meer{
+      display:flex;
+      align-items:center;
 			width:15rem;
+      min-height:4rem;
 			padding:0rem 1rem;
 			background-color:$pink;
 			margin-right:2rem;
@@ -1498,9 +1595,16 @@ footer{
 		.cta{
 			border:none;
 			justify-content:flex-start;
+      margin-bottom:0rem !important;
 		}
+    .resultaat_link{
+      height:100%;
+      min-width:100%;
+      display:flex;
+    }
 		a{
 			color:white;
+
 		}
 	}
 }
@@ -1519,21 +1623,31 @@ footer{
 	}
 }
 .inzenden{
+  position:relative;
 	header{
-		height:50rem;
-		background-color:$grey;
+		height:auto;
+    min-height:40rem;
 	}
 	.header_tekst{
-		height:41rem;
+		min-height:100%;
 		display: flex;
 		width: 100vw;
 		justify-content: center;
 		align-items: center;
 		z-index: 3;
+    background-color:$grey;
 		input{
 			display: none;
 		}
 	}
+  .submit_header{
+    position:relative;
+  }
+  .submit_main{
+    position:relative;
+    top:0rem;
+    margin-top:-5rem;
+  }
 
 	button, label{
 		background-color:$darkgrey;
@@ -1543,22 +1657,28 @@ footer{
 		padding:0rem 2rem;
 		cursor: pointer;
 	}
+  .submit_main_container{
+    position:relative;
+    margin-bottom:5rem;
+  }
 	form{
-		margin-top:-3rem;
 		margin-bottom:10rem;
-		padding:3rem;
 		width:96rem;
 		background-color:white;
-		box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
 		display:flex;
 		align-items:center;
 		flex-direction:column;
 	}
 	.form_container{
+    padding:3rem;
 		display:flex;
 		width:100%;
 		justify-content:space-between;
 		margin-bottom:2rem;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+    background-color:white;
+    position:relative;
+    z-index:1;
 	}
 	.form_item{
 		margin-bottom:3rem;
@@ -1583,12 +1703,11 @@ footer{
 	}
 	.form_item:nth-child(2){
 		height:28rem;
-
-
 		textarea{
 			min-height:100%;
 		}
 	}
+
 	.left{
 		.form_item:nth-child(2){
 			padding-bottom:3rem;
@@ -1599,14 +1718,16 @@ footer{
 		flex-direction:row;
 		justify-content:space-between;
 		flex-wrap:wrap;
-		.form_item:first-child{
+
+		/*.form_item:first-child{
 			min-width:100%;
 			height:28rem;
-		}
+		}*/
 		.form_item{
 			max-width:19.7rem;
-			width:48%;
-			height:13.4rem;
+			min-width:100%;
+			min-height:13.4rem;
+      height:20%;
 			background-color:$grey;
 			display:flex;
 			justify-content:center;
@@ -1630,17 +1751,27 @@ footer{
 		}
 	}
 	input[type="submit"]{
-		width:40rem;
+		width:40%;
+    margin-left:30%;
+    margin-right:30%;
 		height:4rem;
 		font-size:1.4em;
 		background-color:$yellow;
 		box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
 		margin-bottom:-4.5rem;
 		transition:all 0.4s ease;
+    position:absolute;
+    margin-top:-4rem;
+    z-index:2;
+    border:none;
 	}
 	input[type="submit"]:hover{
 		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
 	}
+  footer{
+    position:relative;
+    z-index:3;
+  }
 }
 
 textarea{
@@ -1664,9 +1795,23 @@ form{
 	display:none;
 }
 .aanmelden, .registreren, .reviewpage{
+  overflow:hidden;
+  height:100vh;
 	background-color:$pink;
 	//max-height:100vh;
 	overflow:hidden;
+
+  .cta{
+    font-size:1.4em;
+    font-weight:400;
+    padding-bottom:0.5rem;
+    transition:all 0.4s ease;
+  }
+  .cta:hover{
+    border-bottom:1px solid black;
+    padding-bottom:1rem;
+  }
+
 	header{
 		height:20vh;
 	}
@@ -1699,12 +1844,15 @@ form{
 		align-items:center;
 		justify-content:center;
 		z-index:3;
+    top:0rem;
 	}
 	.afbeelding{
 		width:100vw;
 		height:100vh;
 		position:absolute;
 		z-index:2;
+    top:0rem;
+    overflow:hidden;
 	}
 	.lachende_man{
 		position:absolute;
@@ -1754,16 +1902,27 @@ form{
 	}
 	input[type="email"], input[type="password"], input[type="text"], input[type="tel"]{
 		width:100%;
+    border:none;
 		border-bottom:2px solid $yellow;
 		padding-bottom:1rem;
 		font-size:1.4em;
+    transition:all 0.4s ease;
 	}
+  input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, input[type="tel"]:focus{
+      border-bottom:2px solid $blue;
+  }
 	input[type="submit"]{
 		width:100%;
 		background-color:$yellow;
 		font-size:1.4em;
 		height:4rem;
+    border:none;
+    transition:all 0.4s ease;
 	}
+  input[type="submit"]:focus, input[type="submit"]:hover{
+    letter-spacing:0.1rem;
+    background-color:$blue;
+  }
 
 }
 .reviewpage{
@@ -1772,6 +1931,18 @@ form{
 .sticky{
 	overflow:hidden;
 	width:100vw;
+  margin-top:0rem;
+
+  .boek_btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    a{
+      display:flex;
+      min-height:4rem;
+      align-items:center;
+    }
+  }
 }
 .registreren{
 	form{
